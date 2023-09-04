@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:52:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/03 16:06:13 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/04 15:14:58 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,37 @@ long	atol(const char *str)
 	return (num);
 }
 
+void	join_threads(t_simulation_state **simulation_context)
+{
+	t_philosopher	*temp;
+
+	temp = (*simulation_context)->philosphers;
+	while (true)
+	{
+		pthread_join(temp->thread, NULL);
+		temp = temp->next;
+		if (temp == (*simulation_context)->philosphers)
+			break ;
+	}
+}
+
+void	detach_threads(t_simulation_state **simulation_context)
+{
+	t_philosopher	*temp;
+
+	temp = (*simulation_context)->philosphers;
+	while (true)
+	{
+		if (!pthread_detach(temp->thread))
+			break ;
+		temp = temp->next;
+		if (temp == (*simulation_context)->philosphers)
+			break ;
+	}
+	free_simulation(simulation_context, "Failed to create thread.");
+}
+
+// DELETE:
 void print_list(t_simulation_state *philo)
 {
 	t_philosopher *temp = philo->philosphers;

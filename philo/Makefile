@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/09/03 13:52:41 by cwenz            ###   ########.fr        #
+#    Updated: 2023/09/04 14:29:25 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,20 @@ BUILD_DIR		:= .build
 SRC_DIR			:= ./src/
 INIT_DIR		:= ./src/init/
 UTIL_DIR		:= ./src/utils/
+START_SIM_DIR	:= ./src/simulation/
+FREE_DIR		:= ./src/free/
 
 SRC_FILES		:= main.c
 INIT_FILES		:= init.c init_utils.c
+START_SIM_FILES	:= start_simulation.c
 UTIL_FILES		:= utils.c
+FREE_FILES		:= free_simulation.c
 
 SRC 			+= $(addprefix $(SRC_DIR), $(SRC_FILES))
 SRC 			+= $(addprefix $(INIT_DIR), $(INIT_FILES))
 SRC 			+= $(addprefix $(UTIL_DIR), $(UTIL_FILES))
+SRC 			+= $(addprefix $(FREE_DIR), $(FREE_FILES))
+SRC 			+= $(addprefix $(START_SIM_DIR), $(START_SIM_FILES))
 
 # Objects
 ## patsubst replaces %.c with $(BUILD_DIR)/.o for every file in $(SRC),

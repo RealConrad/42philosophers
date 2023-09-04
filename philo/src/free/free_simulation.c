@@ -1,43 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_utils.c                                       :+:      :+:    :+:   */
+/*   free_simulation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/03 13:44:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/04 09:26:18 by cwenz            ###   ########.fr       */
+/*   Created: 2023/09/04 14:03:03 by cwenz             #+#    #+#             */
+/*   Updated: 2023/09/04 15:08:37 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static bool	check_numeric(const char *str);
-
-bool	check_input(int argc, char **argv)
+void	free_simulation(t_simulation_state **simulation_context, char *msg)
 {
-	int	i;
-
-	i = 0;
-	while (i < argc)
-	{
-		if (!check_numeric(argv[i]) || atol(argv[i]) > INT_MAX)
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-static bool	check_numeric(const char *str)
-{
-	int	i;
-	
-	i = 0;
-	while(str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (false);
-		i++;
-	}
-	return (true);	
+	(void)simulation_context;
+	printf("Error:\n%s\n", msg);
 }

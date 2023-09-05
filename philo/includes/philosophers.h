@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/05 16:20:55 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/05 16:33:23 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ typedef struct s_simulation_state {
 void	*begin_simulation(void *arg);
 
 /* Free */
-void	free_simulation(t_simulation_state **simulation_context, const char *msg, bool display_error);
+void	free_simulation(t_simulation_state *simulation_context, const char *msg, bool display_error);
 
 /* Init */
-int		init_philos(t_simulation_state **simulation_context, int argc, char **argv);
-int		init_mutex(t_simulation_state **simulation_context, int index);
-void	assign_new_philosopher(t_simulation_state **simulation_context, t_philosopher *new_philosopher, int index);
+int		init_philos(t_simulation_state *simulation_context, int argc, char **argv);
+int		init_mutex(t_simulation_state *simulation_context, int index);
+void	assign_new_philosopher(t_simulation_state *simulation_context, t_philosopher *new_philosopher, int index);
 bool	check_input(int argc, char **argv);
 
 /* Utils */
 long	atol(const char *str);
-void	join_threads(t_simulation_state **simulation_context);
-void	detach_threads(t_simulation_state **simulation_context);
+void	join_threads(t_simulation_state *simulation_context);
+void	detach_threads(t_simulation_state *simulation_context);
 void 	print_list(t_simulation_state *philo); // delete!
 
 #endif /* PHILOSOPHERS_H */

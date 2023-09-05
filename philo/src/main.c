@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:39:15 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/04 14:21:12 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/05 12:44:17 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ int	main(int argc, char **argv)
 	t_simulation_state	*simulation_context;
 
 	if (argc != 5 && argc != 6)
-		return (print_error_message("Invalid number of arguments."), ERROR);
+		return (printf("Invalid number of arguments.\n"), ERROR);
 	simulation_context = malloc(sizeof(t_simulation_state));
 	if (!simulation_context)
-		return (print_error_message("Allocation failed."), ERROR);
+		return (free_simulation(&simulation_context, "Allocation failed.", true), ERROR);
 
 	// Initialize philo's into linked list and setup mutex
 	if (init_philos(&simulation_context, --argc, ++argv) != SUCCESS)
 		return (ERROR);
-	// Join threads
 	join_threads(&simulation_context);
+
 	return (SUCCESS);
 }

@@ -6,14 +6,32 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:03:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/04 15:08:37 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/04 17:07:52 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	free_simulation(t_simulation_state **simulation_context, char *msg)
+static void	free_philo_linked_list(t_philosopher *philosopher);
+
+void	free_simulation(t_simulation_state **simulation_context, const char *msg, bool display_error)
 {
-	(void)simulation_context;
-	printf("Error:\n%s\n", msg);
+	if (display_error)
+		printf("Error:\n%s\n", msg);
+	free_philo_linked_list((*simulation_context)->philosphers);
+}
+
+static void	free_philo_linked_list(t_philosopher *philosopher)
+{
+	t_philosopher	*temp;
+	
+	temp = philosopher;
+	while (true)
+	{
+		free(temp);
+		temp = temp->next;
+		if (temp == philosopher)
+			break ;
+	}
+	free(temp);
 }

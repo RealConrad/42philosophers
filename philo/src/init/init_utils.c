@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:44:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/04 09:26:18 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/05 16:20:28 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,21 @@ static bool	check_numeric(const char *str)
 			return (false);
 		i++;
 	}
-	return (true);	
+	return (true);
+}
+
+int	init_mutex(t_simulation_state **simulation_context, int index)
+{
+	if (pthread_mutex_init(&(*simulation_context)->forks[index].mutex, NULL) != SUCCESS);
+		return (ERROR);
+	(*simulation_context)->forks[index].id = index;
+	(*simulation_context)->forks[index].in_use = false;
+}
+
+void	assign_new_philosopher(t_simulation_state **simulation_context, t_philosopher *new_philosopher, int index)
+{
+	new_philosopher->index = index;
+	new_philosopher->time_since_last_meal = 0;
+	new_philosopher->left_fork = &(*simulation_context)->forks[index];
+	new_philosopher->right_fork = &(*simulation_context)->forks[(index + 1) % (*simulation_context)->philo_count];
 }

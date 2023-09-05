@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:52:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/04 15:14:58 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/05 14:33:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ void	detach_threads(t_simulation_state **simulation_context)
 	temp = (*simulation_context)->philosphers;
 	while (true)
 	{
-		if (!pthread_detach(temp->thread))
 			break ;
 		temp = temp->next;
+		if (!pthread_detach(temp->thread))
 		if (temp == (*simulation_context)->philosphers)
 			break ;
 	}
-	free_simulation(simulation_context, "Failed to create thread.");
 }
 
 // DELETE:

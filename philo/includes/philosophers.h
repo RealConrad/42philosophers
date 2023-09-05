@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/04 15:12:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/05 16:20:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <limits.h>
+# include <sys/time.h>
 
 # define SUCCESS 0
-# define ERROR -1 
+# define ERROR -1
 
 typedef enum e_philosopher_state {
 	TAKING_FORK,
@@ -44,7 +45,7 @@ typedef struct s_philosopher {
 	t_fork					*right_fork;
 	pthread_t				thread;
 	int						index;
-	int						time_since_last_meal;
+	int						time_since_last_meal; // change variable type
 }	t_philosopher;
 
 typedef struct s_simulation_state {
@@ -61,14 +62,15 @@ typedef struct s_simulation_state {
 void	*begin_simulation(void *arg);
 
 /* Free */
-void	free_simulation(t_simulation_state **simulation_context, char *msg);
+void	free_simulation(t_simulation_state **simulation_context, const char *msg, bool display_error);
 
 /* Init */
 int		init_philos(t_simulation_state **simulation_context, int argc, char **argv);
+int		init_mutex(t_simulation_state **simulation_context, int index);
+void	assign_new_philosopher(t_simulation_state **simulation_context, t_philosopher *new_philosopher, int index);
 bool	check_input(int argc, char **argv);
 
 /* Utils */
-void	print_error_message(const char *msg);
 long	atol(const char *str);
 void	join_threads(t_simulation_state **simulation_context);
 void	detach_threads(t_simulation_state **simulation_context);

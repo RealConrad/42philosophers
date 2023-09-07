@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/05 16:33:23 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/07 17:27:27 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,25 @@
 # include <limits.h>
 # include <sys/time.h>
 
+/* ************************************************************************** */
+/*                                 Macro's                                    */
+/* ************************************************************************** */
 # define SUCCESS 0
 # define ERROR -1
+# define EVEN 0
+# define ODD 1
+# define FORK_TEXT "has taken a fork"
+# define EATING_TEXT "is eating"
+# define SLEEP_TEXT "is sleeping"
+# define THINKING_TEXT "is thinking"
+# define DEATH_TEXT "died"
 
+/* ************************************************************************** */
+/*                                 Typedefs                                   */
+/* ************************************************************************** */
 typedef enum e_philosopher_state {
-	TAKING_FORK,
+	IDLE,
+	TAKEN_FORK,
 	EATING,
 	THINKING,
 	SLEEPING,
@@ -38,42 +52,76 @@ typedef struct s_fork {
 	bool			in_use;
 }	t_fork;
 
-typedef struct s_philosopher {
+typedef struct s_simulation_data {
+	int	philo_count;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	required_eat_times;
+}	t_simulation_data;
+
+typedef struct s_philosopher {	
 	struct s_philosopher	*next;
 	struct s_philosopher	*prev;
 	t_fork					*left_fork;
 	t_fork					*right_fork;
+	t_simulation_data		*sim_data;
 	pthread_t				thread;
+	t_philosopher_state		state;
 	int						index;
-	int						time_since_last_meal; // change variable type
+	int						time_since_last_meal;
 }	t_philosopher;
 
 typedef struct s_simulation_state {
 	t_philosopher	*philosphers;
 	t_fork			*forks;
-	int				philo_count;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				required_eat_times;
 }	t_simulation_state;
 
-/* Simulation */
+/* ************************************************************************** */
+/*                                 Simulation                                 */
+/* ************************************************************************** */
 void	*begin_simulation(void *arg);
+bool	can_philosopher_eat(t_philosopher *philosopher);
+void	lock_forks(t_philosopher *philosopher);
+void	unlock_forks(t_philosopher *philosopher);
+void	philosopher_sleep(t_philosopher *philosopher);
+void	philosopher_think(t_philosopher *philosopher);
+void	philosopher_try_eat(t_philosopher *philosopher);
 
-/* Free */
+/* ************************************************************************** */
+/*                                 Free                                       */
+/* ************************************************************************** */
 void	free_simulation(t_simulation_state *simulation_context, const char *msg, bool display_error);
 
-/* Init */
+/* ************************************************************************** */
+/*                                 Initialize                                 */
+/* ************************************************************************** */
 int		init_philos(t_simulation_state *simulation_context, int argc, char **argv);
 int		init_mutex(t_simulation_state *simulation_context, int index);
-void	assign_new_philosopher(t_simulation_state *simulation_context, t_philosopher *new_philosopher, int index);
+int		assign_new_philosopher_data(t_simulation_state *simulation_context, t_philosopher *new_philosopher, int index, char **argv);
 bool	check_input(int argc, char **argv);
 
-/* Utils */
+/* ************************************************************************** */
+/*                                 Time                                       */
+/* ************************************************************************** */
+void	wait_for_duraiton(t_philosopher *philosopher, struct timeval start_time_ms);
+int		get_time(void);
+
+/* ************************************************************************** */
+/*                                 Utils                                      */
+/* ************************************************************************** */
 long	atol(const char *str);
 void	join_threads(t_simulation_state *simulation_context);
-void	detach_threads(t_simulation_state *simulation_context);
-void 	print_list(t_simulation_state *philo); // delete!
+int		detach_threads(t_simulation_state *simulation_context);
+void	print_philosopher_state(t_philosopher *philisopher);
+int		get_state_time(t_philosopher *philosopher);
+
+/* ************************************************************************** */
+/*                                 Fork Utils                                 */
+/* ************************************************************************** */
+void	lock_left_fork(t_philosopher *philosopher);
+void	lock_right_fork(t_philosopher *philosopher);
+void	unlock_left_fork(t_philosopher *philosopher);
+void	unlock_right_fork(t_philosopher *philosopher);
 
 #endif /* PHILOSOPHERS_H */

@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eating.c                                           :+:      :+:    :+:   */
+/*   fork_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 15:46:21 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/06 16:01:47 by cwenz            ###   ########.fr       */
+/*   Created: 2023/09/07 16:31:48 by cwenz             #+#    #+#             */
+/*   Updated: 2023/09/07 17:19:01 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-bool	can_philosopher_eat(t_philosopher *philosopher)
+void	lock_left_fork(t_philosopher *philosopher)
 {
-	if (!philosopher->left_fork->in_use && !philosopher->right_fork->in_use)
-		return (true);
-	return (false);
+	pthread_mutex_lock(&philosopher->left_fork->mutex);
+}
+
+void	lock_right_fork(t_philosopher *philosopher)
+{
+	pthread_mutex_lock(&philosopher->right_fork->mutex);	
+}
+
+void	unlock_left_fork(t_philosopher *philosopher)
+{
+	pthread_mutex_unlock(&philosopher->left_fork->mutex);
+}
+
+void	unlock_right_fork(t_philosopher *philosopher)
+{
+	pthread_mutex_unlock(&philosopher->right_fork->mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:44:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/05 16:32:48 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/06 15:57:29 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,21 @@ int	init_mutex(t_simulation_state *simulation_context, int index)
 	return (SUCCESS);
 }
 
-void	assign_new_philosopher(t_simulation_state *simulation_context, t_philosopher *new_philosopher, int index)
+int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philosopher *new_philosopher, int index, char **argv)
 {
+	new_philosopher->sim_data = malloc(sizeof(t_simulation_data));
+	if (!new_philosopher->sim_data)
+		return (ERROR);
+	new_philosopher->sim_data->philo_count = (int)atol(argv[0]);
+	new_philosopher->sim_data->time_to_die = (int)atol(argv[1]);
+	new_philosopher->sim_data->time_to_eat = (int)atol(argv[2]);
+	new_philosopher->sim_data->time_to_sleep = (int)atol(argv[3]);
+	if (argv[4])
+		new_philosopher->sim_data->required_eat_times = (int)atol(argv[4]);
+	new_philosopher->state = IDLE;
 	new_philosopher->index = index;
 	new_philosopher->time_since_last_meal = 0;
 	new_philosopher->left_fork = &simulation_context->forks[index];
-	new_philosopher->right_fork = &simulation_context->forks[(index + 1) % simulation_context->philo_count];
+	new_philosopher->right_fork = &simulation_context->forks[(index + 1) % new_philosopher->sim_data->philo_count];
+	return (SUCCESS);
 }

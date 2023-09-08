@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:52:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/07 11:30:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/08 14:46:50 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,19 @@ int	detach_threads(t_simulation_state *simulation_context)
 	return (SUCCESS);
 }
 
-void	print_philosopher_state(t_philosopher *philisopher)
+void	print_philosopher_state(t_philosopher *philosopher)
 {
-	if (philisopher->state == TAKEN_FORK)
-		printf("Philosopher %d %s\n", philisopher->index, FORK_TEXT);
-	else if (philisopher->state == EATING)
-		printf("Philosopher %d %s\n", philisopher->index, EATING_TEXT);
-	else if (philisopher->state == THINKING)
-		printf("Philosopher %d %s\n", philisopher->index, THINKING_TEXT);
-	else if (philisopher->state == SLEEPING)
-		printf("Philosopher %d %s\n", philisopher->index, SLEEP_TEXT);
-	else if (philisopher->state == DEATH)
-		printf("Philosopher %d %s\n", philisopher->index, DEATH_TEXT);
-}
+	long long	time;
 
-int	get_state_time(t_philosopher *philosopher)
-{
-	if (philosopher->state == EATING)
-		return (philosopher->sim_data->time_to_eat);
+	time = get_time_difference(philosopher->start_time);
+	if (philosopher->state == TAKEN_FORK)
+		printf("%lld Philosopher %d %s\n", time, philosopher->index, FORK_TEXT);
+	else if (philosopher->state == EATING)
+		printf("%lld Philosopher %d %s\n", time, philosopher->index, EATING_TEXT);
+	else if (philosopher->state == THINKING)
+		printf("%lld Philosopher %d %s\n", time, philosopher->index, THINKING_TEXT);
 	else if (philosopher->state == SLEEPING)
-		return (philosopher->sim_data->time_to_sleep);
-	return (0);
+		printf("%lld Philosopher %d %s\n", time, philosopher->index, SLEEP_TEXT);
+	else if (philosopher->state == DEATH)
+		printf("%lld Philosopher %d %s\n", time, philosopher->index, DEATH_TEXT);
 }

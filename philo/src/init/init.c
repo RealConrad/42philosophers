@@ -6,34 +6,34 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:16:23 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/06 14:18:20 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/08 09:21:16 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	init_philo_linked_list(t_simulation_state *simulation_context, char **argv);
+static int init_philo_linked_list(t_simulation_state *simulation_context, char **argv);
 static void add_philosopher_to_linked_list(t_simulation_state *simulation_context,
-	t_philosopher *node);
+										   t_philosopher *node);
 
 int	init_philos(t_simulation_state *simulation_context, int argc, char **argv)
 {
 	if (!check_input(argc, argv))
 		return (free_simulation(simulation_context, "Invalid arguments.", true), ERROR);
-	
+
 	simulation_context->forks = malloc(((int)atol(argv[0]) + 1) * sizeof(t_fork));
 	if (!simulation_context->forks)
-		return (free_simulation(simulation_context, "Failed to allocate memory for forks.", true),  ERROR);
+		return (free_simulation(simulation_context, "Failed to allocate memory for forks.", true), ERROR);
 
 	if (init_philo_linked_list(simulation_context, argv) != SUCCESS)
-		return (free_simulation(simulation_context, "Failed to initialize philosopher linked list.", true),  ERROR);
+		return (free_simulation(simulation_context, "Failed to initialize philosopher linked list.", true), ERROR);
 	return (SUCCESS);
 }
 
 static int	init_philo_linked_list(t_simulation_state *simulation_context, char **argv)
 {
-	t_philosopher	*new_philosopher;
-	int				i;
+	t_philosopher *new_philosopher;
+	int i;
 
 	i = 0;
 	while (i < (int)atol(argv[0]))
@@ -55,8 +55,8 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 
 static void add_philosopher_to_linked_list(t_simulation_state *simulation_context, t_philosopher *node)
 {
-	t_philosopher	*tail;
-	
+	t_philosopher *tail;
+
 	if (!simulation_context->philosphers)
 	{
 		node->next = node;

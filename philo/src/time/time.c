@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:09:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/10 12:54:09 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/10 14:42:06 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	wait_for_duration(long wait_time)
 	long long	start_time;
 	long long	elapsed_time;
 
-	start_time = get_time();
+	start_time = get_current_time();
 	while(true)
 	{
-		elapsed_time = get_time() - start_time; 
+		elapsed_time = get_current_time() - start_time; 
 		if (elapsed_time >= wait_time)
 			return ;
-		// usleep(100);
+		usleep(100);
 	}
 }
 
@@ -51,7 +51,7 @@ long long	get_time_difference(struct timeval start_time)
  *        value may wrap around or become inaccurate after long periods 
  *        of uptime.
  */
-long long	get_time(void)
+long long	get_current_time(void)
 {
 	struct timeval		elasped_ms;
 	long long			result;

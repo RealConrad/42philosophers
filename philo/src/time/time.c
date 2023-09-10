@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:09:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/10 14:42:06 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/10 17:27:25 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	wait_for_duration(long wait_time)
 	start_time = get_current_time();
 	while(true)
 	{
-		elapsed_time = get_current_time() - start_time; 
+		elapsed_time = get_current_time() - start_time;
 		if (elapsed_time >= wait_time)
 			return ;
 		usleep(100);
@@ -29,13 +29,12 @@ void	wait_for_duration(long wait_time)
 
 long long	get_time_difference(struct timeval start_time)
 {
-	struct timeval		end_time_ms;
-	long long			result;
+	long long	current_time_ms;
+	long long	start_time_ms;
 
-	gettimeofday(&end_time_ms, NULL);
-	result = (end_time_ms.tv_sec - start_time.tv_sec) * 1000;
-	result += (end_time_ms.tv_usec - start_time.tv_usec) / 1000;
-	return (result);
+	start_time_ms = (start_time.tv_sec * 1000) + ((start_time.tv_usec) / 1000);
+	current_time_ms = get_current_time();
+	return (current_time_ms - start_time_ms);
 }
 
 /**
@@ -57,7 +56,7 @@ long long	get_current_time(void)
 	long long			result;
 
 	gettimeofday(&elasped_ms, NULL);
-	result = (elasped_ms.tv_sec * 1000) + (elasped_ms.tv_usec / 1000); 
+	result = (elasped_ms.tv_sec * 1000) + ((elasped_ms.tv_usec) / 1000);
 	return (result);
 }
 

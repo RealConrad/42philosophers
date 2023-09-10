@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:37:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/08 19:22:09 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/10 17:49:57 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	*begin_simulation(void *arg)
 
 	philosopher = (t_philosopher *)arg;
 	is_even = philosopher->sim_data->philo_count % 2 == EVEN;
-	gettimeofday(&philosopher->start_time, NULL);
 	while (true)
 	{
 		if (is_even)

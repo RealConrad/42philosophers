@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:16:23 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/08 09:21:16 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/10 17:53:26 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ int	init_philos(t_simulation_state *simulation_context, int argc, char **argv)
 
 static int	init_philo_linked_list(t_simulation_state *simulation_context, char **argv)
 {
-	t_philosopher *new_philosopher;
-	int i;
+	t_philosopher 	*new_philosopher;
+	struct timeval	start_time;
+	int 			i;
 
 	i = 0;
+	gettimeofday(&start_time, NULL);
 	while (i < (int)atol(argv[0]))
 	{
 		new_philosopher = malloc(sizeof(t_philosopher));
 		if (!new_philosopher)
 			return (ERROR);
+		new_philosopher->start_time = start_time;
 		if (init_mutex(simulation_context, i) != SUCCESS)
 			return (ERROR);
 		if (assign_new_philosopher_data(simulation_context, new_philosopher, i, argv) != SUCCESS)

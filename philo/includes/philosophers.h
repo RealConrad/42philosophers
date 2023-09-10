@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/08 17:54:01 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/10 12:54:01 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ bool		check_input(int argc, char **argv);
 /* ************************************************************************** */
 void		wait_for_duration(long wait_time);
 long long	get_time(void);
-long long	get_time_difference(struct timeval start_time_ms);
+long long	get_time_difference(struct timeval start_time);
 
 /* ************************************************************************** */
 /*                                 Utils                                      */

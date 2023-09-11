@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:52:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/10 15:08:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/11 15:10:13 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void	print_philosopher_state(t_philosopher *philosopher)
 {
 	long long	time;
 
-	time = get_time_difference(philosopher->start_time);
-	(void)time;
+	time = get_time_difference(philosopher->start_time_ms);
 	if (philosopher->state == TAKEN_FORK)
 		printf("%lld Philosopher %d %s\n", time, philosopher->index, FORK_TEXT);
 	else if (philosopher->state == EATING)

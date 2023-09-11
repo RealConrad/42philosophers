@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/11 14:39:51 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/11 15:19:59 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_philosopher {
 	int						index;
 	int						time_since_last_meal;
 	pthread_mutex_t			time_since_last_meal_mutex;
-	struct timeval			start_time;
+	long long				start_time_ms;
 }	t_philosopher;
 
 typedef struct s_simulation_state {
@@ -109,7 +109,7 @@ bool		check_input(int argc, char **argv);
 /* ************************************************************************** */
 void		wait_for_duration(long wait_time);
 long long	get_current_time(void);
-long long	get_time_difference(struct timeval start_time);
+long long	get_time_difference(long long start_time_ms);
 void		lock_time_mutex(t_philosopher *philosopher);
 void		unlock_time_mutex(t_philosopher *philosopher);
 void		update_time_since_last_meal(t_philosopher *philosopher);
@@ -130,8 +130,5 @@ void		lock_left_fork(t_philosopher *philosopher);
 void		lock_right_fork(t_philosopher *philosopher);
 void		unlock_left_fork(t_philosopher *philosopher);
 void		unlock_right_fork(t_philosopher *philosopher);
-
-
-void	milisleep(long long time);//DELETE	
 
 #endif /* PHILOSOPHERS_H */

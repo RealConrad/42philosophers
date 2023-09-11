@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:09:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/10 17:27:25 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/11 15:19:48 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ void	wait_for_duration(long wait_time)
 	}
 }
 
-long long	get_time_difference(struct timeval start_time)
+long long	get_time_difference(long long start_time_ms)
 {
 	long long	current_time_ms;
-	long long	start_time_ms;
-
-	start_time_ms = (start_time.tv_sec * 1000) + ((start_time.tv_usec) / 1000);
+	
 	current_time_ms = get_current_time();
 	return (current_time_ms - start_time_ms);
 }
@@ -52,11 +50,11 @@ long long	get_time_difference(struct timeval start_time)
  */
 long long	get_current_time(void)
 {
-	struct timeval		elasped_ms;
+	struct timeval		current_time;
 	long long			result;
 
-	gettimeofday(&elasped_ms, NULL);
-	result = (elasped_ms.tv_sec * 1000) + ((elasped_ms.tv_usec) / 1000);
+	gettimeofday(&current_time, NULL);
+	result = (current_time.tv_sec * 1000) + ((current_time.tv_usec) / 1000);
 	return (result);
 }
 

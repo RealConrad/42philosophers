@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/10 17:58:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/11 14:39:51 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_philosopher {
 	t_philosopher_state		state;
 	int						index;
 	int						time_since_last_meal;
+	pthread_mutex_t			time_since_last_meal_mutex;
 	struct timeval			start_time;
 }	t_philosopher;
 
@@ -109,6 +110,9 @@ bool		check_input(int argc, char **argv);
 void		wait_for_duration(long wait_time);
 long long	get_current_time(void);
 long long	get_time_difference(struct timeval start_time);
+void		lock_time_mutex(t_philosopher *philosopher);
+void		unlock_time_mutex(t_philosopher *philosopher);
+void		update_time_since_last_meal(t_philosopher *philosopher);
 
 /* ************************************************************************** */
 /*                                 Utils                                      */

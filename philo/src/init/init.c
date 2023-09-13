@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:16:23 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/11 15:13:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/13 14:16:33 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_philos(t_simulation_state *simulation_context, int argc, char **argv)
 	if (!check_input(argc, argv))
 		return (free_simulation(simulation_context, "Invalid arguments.", true), ERROR);
 
-	simulation_context->forks = malloc(((int)atol(argv[0]) + 1) * sizeof(t_fork));
+	simulation_context->forks = malloc((atol(argv[0]) + 1) * sizeof(t_fork));
 	if (!simulation_context->forks)
 		return (free_simulation(simulation_context, "Failed to allocate memory for forks.", true), ERROR);
 
@@ -58,7 +58,7 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 
 static void add_philosopher_to_linked_list(t_simulation_state *simulation_context, t_philosopher *node)
 {
-	t_philosopher *tail;
+	t_philosopher *tail = NULL;
 
 	if (!simulation_context->philosphers)
 	{

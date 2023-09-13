@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:44:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/08 14:12:57 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/13 13:49:50 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philos
 		new_philosopher->sim_data->required_eat_times = atol(argv[4]);
 	new_philosopher->state = IDLE;
 	new_philosopher->index = index;
-	new_philosopher->time_since_last_meal = 0;
+	new_philosopher->time_since_last_meal = get_current_time();
 	new_philosopher->left_fork = &simulation_context->forks[index];
 	new_philosopher->right_fork = &simulation_context->forks[(index + 1) % new_philosopher->sim_data->philo_count];
+	if (pthread_mutex_init(&new_philosopher->time_since_last_meal_mutex, NULL))
+		return (ERROR);
 	return (SUCCESS);
 }

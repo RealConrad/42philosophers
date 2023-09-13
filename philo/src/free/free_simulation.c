@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:03:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/05 16:29:58 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/13 14:09:31 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_simulation(t_simulation_state *simulation_context, const char *msg, bo
 	if (display_error)
 		printf("Error:\n%s\n", msg);
 	free_philo_linked_list(simulation_context->philosphers);
+	free(simulation_context->forks);
 }
 
 static void	free_philo_linked_list(t_philosopher *philosopher)

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/11 18:08:26 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/15 13:56:01 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_philosopher {
 	pthread_t				thread;
 	t_philosopher_state		state;
 	int						index;
+	int						number_of_times_eaten;
 	long long				time_since_last_meal;
 	pthread_mutex_t			time_since_last_meal_mutex;
 	long long				start_time_ms;

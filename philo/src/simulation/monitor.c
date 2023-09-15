@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:27 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/13 15:35:12 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/15 13:58:07 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	monitor_philosophers(t_simulation_state *simulation_context)
 	t_philosopher	*philosopher;
 	long long		time;
 
-	(void) simulation_context;
 	philosopher = simulation_context->philosphers;
 	while (true)
 	{
@@ -29,7 +28,8 @@ void	monitor_philosophers(t_simulation_state *simulation_context)
 		{
 			change_philosopher_state(philosopher, DEATH);
 			print_philosopher_state(philosopher);
-			exit(0);
+			detach_threads(simulation_context);
+			return ;
 		}
 		unlock_time_mutex(philosopher);
 		philosopher = philosopher->next;

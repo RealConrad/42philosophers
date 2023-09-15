@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:16:23 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/13 14:16:33 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/13 16:25:39 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 
 static void add_philosopher_to_linked_list(t_simulation_state *simulation_context, t_philosopher *node)
 {
-	t_philosopher *tail = NULL;
+	t_philosopher *tail;
 
 	if (!simulation_context->philosphers)
 	{

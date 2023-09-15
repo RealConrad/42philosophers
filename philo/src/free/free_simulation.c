@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:03:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/13 14:09:31 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/13 16:43:23 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,4 @@ static void	free_philo_linked_list(t_philosopher *philosopher)
 		if (temp == philosopher)
 			break ;
 	}
-	free(temp);
 }

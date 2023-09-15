@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:39:15 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/13 15:15:51 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/13 16:29:45 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	if (init_philos(&simulation_context, --argc, ++argv) != SUCCESS)
 		return (ERROR);
 	monitor_philosophers(&simulation_context);
-	join_threads(&simulation_context);
 	free_simulation(&simulation_context, "", false);
 	return (SUCCESS);
 }

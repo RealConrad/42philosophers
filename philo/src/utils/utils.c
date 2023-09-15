@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:52:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/13 13:17:55 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/15 14:00:27 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	detach_threads(t_simulation_state *simulation_context)
 	temp = simulation_context->philosphers;
 	while (true)
 	{
-		break;
 		temp = temp->next;
 		if (!pthread_detach(temp->thread))
 			return (ERROR);

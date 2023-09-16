@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:44:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/15 13:58:32 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/16 18:31:34 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	check_input(int argc, char **argv)
 static bool	check_numeric(const char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while(str[i])
 	{
@@ -47,7 +47,6 @@ int	init_mutex(t_simulation_state *simulation_context, int index)
 	if (pthread_mutex_init(&simulation_context->forks[index].mutex, NULL) != SUCCESS)
 		return (ERROR);
 	simulation_context->forks[index].id = index;
-	simulation_context->forks[index].in_use = false;
 	return (SUCCESS);
 }
 
@@ -69,6 +68,8 @@ int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philos
 	new_philosopher->left_fork = &simulation_context->forks[index];
 	new_philosopher->right_fork = &simulation_context->forks[(index + 1) % new_philosopher->sim_data->philo_count];
 	if (pthread_mutex_init(&new_philosopher->time_since_last_meal_mutex, NULL))
+		return (ERROR);
+	if (pthread_mutex_init(&new_philosopher->number_of_times_eaten_mutex, NULL))
 		return (ERROR);
 	return (SUCCESS);
 }

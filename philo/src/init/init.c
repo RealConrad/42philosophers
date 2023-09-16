@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:16:23 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/13 16:25:39 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/16 17:28:57 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 static int init_philo_linked_list(t_simulation_state *simulation_context, char **argv);
 static void add_philosopher_to_linked_list(t_simulation_state *simulation_context,
-										   t_philosopher *node);
+											t_philosopher *node);
 
 int	init_philos(t_simulation_state *simulation_context, int argc, char **argv)
 {
 	if (!check_input(argc, argv))
-		return (free_simulation(simulation_context, "Invalid arguments.", true), ERROR);
+		return (ERROR);
 
 	simulation_context->forks = malloc((atol(argv[0]) + 1) * sizeof(t_fork));
 	if (!simulation_context->forks)
-		return (free_simulation(simulation_context, "Failed to allocate memory for forks.", true), ERROR);
+		return (ERROR);
 
 	if (init_philo_linked_list(simulation_context, argv) != SUCCESS)
-		return (free_simulation(simulation_context, "Failed to initialize philosopher linked list.", true), ERROR);
+		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -50,7 +50,7 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 			return (ERROR);
 		add_philosopher_to_linked_list(simulation_context, new_philosopher);
 		if (pthread_create(&new_philosopher->thread, NULL, *begin_simulation, new_philosopher) != SUCCESS)
-			return (detach_threads(simulation_context), ERROR);
+			return (ERROR);
 		i++;
 	}
 	return (SUCCESS);

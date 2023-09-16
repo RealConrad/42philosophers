@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:52:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/15 14:00:27 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/16 17:51:38 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ void join_threads(t_simulation_state *simulation_context)
 		if (temp == simulation_context->philosphers)
 			break;
 	}
-	printf("\n\nJoined all threads\n");
 }
 
-int	detach_threads(t_simulation_state *simulation_context)
+void	detach_threads(t_simulation_state *simulation_context)
 {
 	t_philosopher *temp;
 
@@ -51,12 +50,11 @@ int	detach_threads(t_simulation_state *simulation_context)
 	while (true)
 	{
 		temp = temp->next;
-		if (!pthread_detach(temp->thread))
-			return (ERROR);
+		if (temp->thread)
+			pthread_detach(temp->thread);
 		if (temp == simulation_context->philosphers)
 			break;
 	}
-	return (SUCCESS);
 }
 
 void	print_philosopher_state(t_philosopher *philosopher)

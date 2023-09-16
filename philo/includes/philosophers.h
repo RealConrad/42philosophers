@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/15 13:56:01 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/16 18:31:28 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 /* ************************************************************************** */
 # define SUCCESS 0
 # define ERROR -1
+# define ATE_ENOUGH 2
 # define EVEN 0
 # define ODD 1
 # define FORK_TEXT "has taken a fork"
@@ -50,7 +51,6 @@ typedef enum e_philosopher_state {
 typedef struct s_fork {
 	pthread_mutex_t	mutex;
 	int				id;
-	bool			in_use;
 }	t_fork;
 
 typedef struct s_simulation_data {
@@ -69,10 +69,11 @@ typedef struct s_philosopher {
 	t_simulation_data		*sim_data;
 	pthread_t				thread;
 	t_philosopher_state		state;
+	pthread_mutex_t			time_since_last_meal_mutex;
+	pthread_mutex_t			number_of_times_eaten_mutex;
 	int						index;
 	int						number_of_times_eaten;
 	long long				time_since_last_meal;
-	pthread_mutex_t			time_since_last_meal_mutex;
 	long long				start_time_ms;
 }	t_philosopher;
 
@@ -91,7 +92,8 @@ void		unlock_forks(t_philosopher *philosopher);
 void		philosopher_sleep(t_philosopher *philosopher);
 void		philosopher_think(t_philosopher *philosopher);
 void		philosopher_try_eat(t_philosopher *philosopher);
-void		monitor_philosophers(t_simulation_state *simulation_context);
+void		monitor_philosophers(t_simulation_state *simulation_context, int argc);
+void		update_number_of_times_eaten(t_philosopher *philosopher);
 
 /* ************************************************************************** */
 /*                                 Free                                       */
@@ -121,7 +123,7 @@ void		update_time_since_last_meal(t_philosopher *philosopher);
 /* ************************************************************************** */
 long		atol(const char *str);
 void		join_threads(t_simulation_state *simulation_context);
-int			detach_threads(t_simulation_state *simulation_context);
+void		detach_threads(t_simulation_state *simulation_context);
 void		print_philosopher_state(t_philosopher *philisopher);
 void		change_philosopher_state(t_philosopher *philosopher, t_philosopher_state state);
 
@@ -132,5 +134,11 @@ void		lock_left_fork(t_philosopher *philosopher);
 void		lock_right_fork(t_philosopher *philosopher);
 void		unlock_left_fork(t_philosopher *philosopher);
 void		unlock_right_fork(t_philosopher *philosopher);
+
+/* ************************************************************************** */
+/*                                 Eat Utils                                  */
+/* ************************************************************************** */
+void	lock_eat_counter_mutex(t_philosopher *philosopher);
+void	unlock_eat_counter_mutex(t_philosopher *philosopher);
 
 #endif /* PHILOSOPHERS_H */

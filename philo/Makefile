@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/09/14 18:42:26 by cwenz            ###   ########.fr        #
+#    Updated: 2023/09/16 18:12:18 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,9 @@ TIME_DIR		:= ./src/time/
 
 SRC_FILES		:= main.c
 INIT_FILES		:= init.c init_utils.c
-SIM_FILES		:= start_simulation.c eating.c fork.c simulation_utils.c monitor.c
+SIM_FILES		:= start_simulation.c fork.c simulation_utils.c monitor.c eat.c
 TIME_FILES		:= time.c
-UTIL_FILES		:= utils.c fork_utils.c state_utils.c time_utils.c
+UTIL_FILES		:= utils.c fork_utils.c state_utils.c time_utils.c eat_utils.c
 FREE_FILES		:= free_simulation.c
 
 SRC 			+= $(addprefix $(SRC_DIR), $(SRC_FILES))

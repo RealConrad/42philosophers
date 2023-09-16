@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 18:31:28 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/16 20:50:58 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,13 @@ typedef struct s_philosopher {
 	int						number_of_times_eaten;
 	long long				time_since_last_meal;
 	long long				start_time_ms;
+	bool					should_still_eat;
 }	t_philosopher;
 
 typedef struct s_simulation_state {
 	t_philosopher	*philosphers;
 	t_fork			*forks;
+	long			num_philo_finished_eating;
 }	t_simulation_state;
 
 /* ************************************************************************** */
@@ -94,6 +96,7 @@ void		philosopher_think(t_philosopher *philosopher);
 void		philosopher_try_eat(t_philosopher *philosopher);
 void		monitor_philosophers(t_simulation_state *simulation_context, int argc);
 void		update_number_of_times_eaten(t_philosopher *philosopher);
+int			check_if_eaten_enough(t_philosopher *philosopher);
 
 /* ************************************************************************** */
 /*                                 Free                                       */

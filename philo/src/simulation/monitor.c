@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:27 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 18:32:46 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/16 19:58:28 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,18 @@ static int	has_eaten_enough_times(t_philosopher *philosopher);
 void	monitor_philosophers(t_simulation_state *simulation_context, int argc)
 {
 	t_philosopher	*philosopher;
-	int				total_finished_eating;
 
-	total_finished_eating = 0;
 	philosopher = simulation_context->philosphers;
+	simulation_context->num_philo_finished_eating = 0;
 	while (true)
 	{
-		// if (argc == 6)
-		// {
-		// 	if (has_eaten_enough_times(philosopher) != SUCCESS)
-		// 		total_finished_eating++;
-		// 	if (total_finished_eating == philosopher->sim_data->philo_count - 1)
-		// 	{
-		// 		printf("STATIC: %d ::: %ld\n", total_finished_eating, philosopher->sim_data->philo_count);
-		// 		return ;
-		// 	}
-		// }
-		(void)argc;
-		(void)has_eaten_enough_times;
+		if (argc == 6)
+		{
+			if (has_eaten_enough_times(philosopher) == ATE_ENOUGH)
+				simulation_context->num_philo_finished_eating++;
+			if (simulation_context->num_philo_finished_eating >= philosopher->sim_data->philo_count)
+				return ;
+		}
 		if (should_philosopher_die(philosopher) != SUCCESS)
 			return ;
 		
@@ -48,7 +42,8 @@ static int	has_eaten_enough_times(t_philosopher *philosopher)
 	lock_eat_counter_mutex(philosopher);
 	if (philosopher->number_of_times_eaten >= philosopher->sim_data->philo_count)
 	{
-		pthread_detach(philosopher->thread);
+		philosopher->should_still_eat = false;
+		printf("PHILO %d FINISHED EATING!!!!!!\n", philosopher->index);
 		return (ATE_ENOUGH);
 	}
 	unlock_eat_counter_mutex(philosopher);

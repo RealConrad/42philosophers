@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/17 13:13:47 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:19:14 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_philosopher {
 	pthread_t				thread;
 	t_philosopher_state		state;
 	pthread_mutex_t			time_since_last_meal_mutex;
+	pthread_mutex_t			state_change_mutex;
 	int						index;
 	int						number_of_times_eaten;
 	long long				time_since_last_meal;
@@ -142,5 +143,12 @@ void		unlock_right_fork(t_philosopher *philosopher);
 /* ************************************************************************** */
 void	lock_eat_counter_mutex(t_philosopher *philosopher);
 void	unlock_eat_counter_mutex(t_philosopher *philosopher);
+
+/* ************************************************************************** */
+/*                                 State Utils                                */
+/* ************************************************************************** */
+void	lock_philosopher_state(t_philosopher *philosopher);
+void	unlock_philosopher_state(t_philosopher *philosopher);
+
 
 #endif /* PHILOSOPHERS_H */

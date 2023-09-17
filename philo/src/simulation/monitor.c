@@ -6,14 +6,13 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:27 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/17 13:14:40 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:24:38 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 static int	should_philosopher_die(t_philosopher *philosopher);
-static int	has_eaten_enough_times(t_philosopher *philosopher);
 
 void	monitor_philosophers(t_simulation_state *simulation_context, int argc)
 {
@@ -25,19 +24,18 @@ void	monitor_philosophers(t_simulation_state *simulation_context, int argc)
 	{
 		if (argc == 6)
 		{
-			(void)has_eaten_enough_times;
+			lock_philosopher_state(philosopher);
+			if (philosopher->state == FINISHED_EATING)
+				simulation_context->num_philo_finished_eating++;
+			if (simulation_context->num_philo_finished_eating >= philosopher->sim_data->required_eat_times)
+				return ;
+			unlock_philosopher_state(philosopher);
 		}
 		if (should_philosopher_die(philosopher) != SUCCESS)
 			return ;
 		
 		philosopher = philosopher->next;
 	}
-}
-
-static int	has_eaten_enough_times(t_philosopher *philosopher)
-{
-	(void)philosopher;
-	return (SUCCESS);
 }
 
 static int	should_philosopher_die(t_philosopher *philosopher)

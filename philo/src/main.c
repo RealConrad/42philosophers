@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:39:15 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 18:24:23 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:25:40 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int argc, char **argv)
 	monitor_philosophers(&simulation_context, ++argc);
 	detach_threads(&simulation_context);
 	free_simulation(&simulation_context, "", false);
+	printf("Shutting down now.... ¯\\_(ツ)_/¯ \n");
 	return (SUCCESS);
 }

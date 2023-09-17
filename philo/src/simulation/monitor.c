@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:27 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 19:58:28 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:14:40 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void	monitor_philosophers(t_simulation_state *simulation_context, int argc)
 	{
 		if (argc == 6)
 		{
-			if (has_eaten_enough_times(philosopher) == ATE_ENOUGH)
-				simulation_context->num_philo_finished_eating++;
-			if (simulation_context->num_philo_finished_eating >= philosopher->sim_data->philo_count)
-				return ;
+			(void)has_eaten_enough_times;
 		}
 		if (should_philosopher_die(philosopher) != SUCCESS)
 			return ;
@@ -39,14 +36,7 @@ void	monitor_philosophers(t_simulation_state *simulation_context, int argc)
 
 static int	has_eaten_enough_times(t_philosopher *philosopher)
 {
-	lock_eat_counter_mutex(philosopher);
-	if (philosopher->number_of_times_eaten >= philosopher->sim_data->philo_count)
-	{
-		philosopher->should_still_eat = false;
-		printf("PHILO %d FINISHED EATING!!!!!!\n", philosopher->index);
-		return (ATE_ENOUGH);
-	}
-	unlock_eat_counter_mutex(philosopher);
+	(void)philosopher;
 	return (SUCCESS);
 }
 

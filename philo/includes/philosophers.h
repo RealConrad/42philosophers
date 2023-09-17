@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 20:50:58 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:13:47 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef enum e_philosopher_state {
 	EATING,
 	THINKING,
 	SLEEPING,
+	FINISHED_EATING,
 	DEATH
 }	t_philosopher_state;
 
@@ -70,12 +71,10 @@ typedef struct s_philosopher {
 	pthread_t				thread;
 	t_philosopher_state		state;
 	pthread_mutex_t			time_since_last_meal_mutex;
-	pthread_mutex_t			number_of_times_eaten_mutex;
 	int						index;
 	int						number_of_times_eaten;
 	long long				time_since_last_meal;
 	long long				start_time_ms;
-	bool					should_still_eat;
 }	t_philosopher;
 
 typedef struct s_simulation_state {

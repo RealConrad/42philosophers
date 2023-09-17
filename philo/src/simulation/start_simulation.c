@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:37:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 20:51:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:08:17 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*begin_simulation(void *arg)
 			handle_even_total_philosophers(philosopher);
 		else
 			handle_odd_total_philosophers(philosopher);
-		if (philosopher->sim_data->required_eat_times && check_if_eaten_enough(philosopher) == 0)
+		if (check_if_eaten_enough(philosopher) == 0)
 			break ;
 	}
 	return (NULL);

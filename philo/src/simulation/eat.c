@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:11:23 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 20:50:30 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:14:03 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void	update_number_of_times_eaten(t_philosopher *philosopher)
 {
-	lock_eat_counter_mutex(philosopher);
 	philosopher->number_of_times_eaten++;
-	unlock_eat_counter_mutex(philosopher);
 }
 
 int	check_if_eaten_enough(t_philosopher *philosopher)
 {
-	lock_eat_counter_mutex(philosopher);
-	if (philosopher->number_of_times_eaten == philosopher->sim_data->required_eat_times)
+	if (philosopher->sim_data->required_eat_times && philosopher->number_of_times_eaten == philosopher->sim_data->required_eat_times)
+	{
+		change_philosopher_state(philosopher, FINISHED_EATING);
 		return (0);
-	unlock_eat_counter_mutex(philosopher);
+	}
 	return (1);
 }

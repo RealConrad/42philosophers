@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:52:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 17:51:38 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/18 16:50:05 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	detach_threads(t_simulation_state *simulation_context)
 	while (true)
 	{
 		temp = temp->next;
+		printf("---------------Philo [%d] ate: %d\n", temp->index, temp->number_of_times_eaten);
 		if (temp->thread)
 			pthread_detach(temp->thread);
 		if (temp == simulation_context->philosphers)

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:27 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/17 13:24:38 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/18 16:42:27 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	monitor_philosophers(t_simulation_state *simulation_context, int argc)
 			lock_philosopher_state(philosopher);
 			if (philosopher->state == FINISHED_EATING)
 				simulation_context->num_philo_finished_eating++;
-			if (simulation_context->num_philo_finished_eating >= philosopher->sim_data->required_eat_times)
+			if (simulation_context->num_philo_finished_eating >= philosopher->sim_data->philo_count)
 				return ;
 			unlock_philosopher_state(philosopher);
 		}

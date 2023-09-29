@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:44:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 14:36:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 17:56:15 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philos
 	new_philosopher->state = IDLE;
 	new_philosopher->number_of_times_eaten = 0;
 	new_philosopher->index = index;
+	new_philosopher->dead = false;
 	new_philosopher->time_since_last_meal = get_current_time();
 	new_philosopher->has_finished_eating = false;
 	new_philosopher->has_counted_philo = false;

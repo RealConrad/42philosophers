@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:52:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 16:55:20 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 18:13:31 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,15 @@ void	detach_threads(t_simulation_state *simulation_context)
 
 void	print_philosopher_state(t_philosopher *philosopher)
 {
-	long long	time;
-
-	time = get_time_difference(philosopher->start_time_ms);
+	
 	if (philosopher->state == TAKEN_FORK)
-		printf("%lld %d %s\n", time, philosopher->index, FORK_TEXT);
+		printf("%lld %d %s\n", get_time_difference(philosopher->start_time_ms), philosopher->index, FORK_TEXT);
 	else if (philosopher->state == EATING)
-		printf("%lld %d %s\n", time, philosopher->index, EATING_TEXT);
+		printf("%lld %d %s\n", get_time_difference(philosopher->start_time_ms), philosopher->index, EATING_TEXT);
 	else if (philosopher->state == THINKING)
-		printf("%lld %d %s\n", time, philosopher->index, THINKING_TEXT);
+		printf("%lld %d %s\n", get_time_difference(philosopher->start_time_ms), philosopher->index, THINKING_TEXT);
 	else if (philosopher->state == SLEEPING)
-		printf("%lld %d %s\n", time, philosopher->index, SLEEP_TEXT);
+		printf("%lld %d %s\n", get_time_difference(philosopher->start_time_ms), philosopher->index, SLEEP_TEXT);
 	else if (philosopher->state == DEATH)
-		printf("%lld %d %s\n", time, philosopher->index, DEATH_TEXT);
+		printf("%lld %d %s\n", get_time_difference(philosopher->start_time_ms), philosopher->index, DEATH_TEXT);
 }

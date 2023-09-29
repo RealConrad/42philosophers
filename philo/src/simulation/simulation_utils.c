@@ -6,13 +6,13 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:23:49 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 14:38:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 18:07:12 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	philosopher_try_eat(t_philosopher *philosopher)
+void	philosopher_eat(t_philosopher *philosopher)
 {
 	lock_forks(philosopher);
 	change_philosopher_state(philosopher, EATING);

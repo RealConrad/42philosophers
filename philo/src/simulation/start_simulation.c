@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:37:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 17:37:36 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 18:07:27 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,30 @@ void	*begin_simulation(void *arg)
 
 	philosopher = (t_philosopher *)arg;
 	is_even = philosopher->sim_data->philo_count % 2 == EVEN;
-	while (true)
-	{
-		if (is_even)
-			handle_even_total_philosophers(philosopher);
-		else
-			handle_odd_total_philosophers(philosopher);
-	}
+	if (is_even)
+		handle_even_total_philosophers(philosopher);
+	else
+		handle_odd_total_philosophers(philosopher);
 	return (NULL);
 }
 
 
 static void	handle_even_total_philosophers(t_philosopher *philosopher)
 {
-	if (philosopher->index % 2 == EVEN)
+	while (true)
 	{
-		philosopher_try_eat(philosopher);
-		philosopher_sleep(philosopher);
-		philosopher_think(philosopher);
-	}
-	else
-	{
-		philosopher_sleep(philosopher);
-		philosopher_try_eat(philosopher);
-		philosopher_think(philosopher);
+		if (philosopher->index % 2 == EVEN)
+		{
+			philosopher_eat(philosopher);
+			philosopher_sleep(philosopher);
+			philosopher_think(philosopher);
+		}
+		else
+		{
+			philosopher_sleep(philosopher);
+			philosopher_eat(philosopher);
+			philosopher_think(philosopher);
+		}
 	}
 }
 

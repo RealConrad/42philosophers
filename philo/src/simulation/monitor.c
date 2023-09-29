@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:27 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 14:36:55 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 18:08:52 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ static int	should_philosopher_die(t_philosopher *philosopher)
 	time = get_time_difference(philosopher->time_since_last_meal);
 	if (time > philosopher->sim_data->time_to_die)
 	{
-		lock_philosopher_state(philosopher);
 		change_philosopher_state(philosopher, DEATH);
-		unlock_philosopher_state(philosopher);
 		print_philosopher_state(philosopher);
 		return (ERROR);
 	}

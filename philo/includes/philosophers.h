@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 17:33:49 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 18:07:22 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef enum e_philosopher_state {
 	THINKING,
 	SLEEPING,
 	FINISHED_EATING,
+	DEATH
 }	t_philosopher_state;
 
 typedef struct s_fork {
@@ -71,6 +72,7 @@ typedef struct s_philosopher {
 	t_philosopher_state		state;
 	bool					has_finished_eating;
 	bool					has_counted_philo;
+	bool					dead;
 	pthread_mutex_t			has_finished_eating_mutex;
 	pthread_mutex_t			time_since_last_meal_mutex;
 	pthread_mutex_t			state_change_mutex;
@@ -95,7 +97,7 @@ void		lock_forks(t_philosopher *philosopher);
 void		unlock_forks(t_philosopher *philosopher);
 void		philosopher_sleep(t_philosopher *philosopher);
 void		philosopher_think(t_philosopher *philosopher);
-void		philosopher_try_eat(t_philosopher *philosopher);
+void		philosopher_eat(t_philosopher *philosopher);
 void		monitor_philosophers(t_simulation_state *simulation_context, int argc);
 void		update_number_of_times_eaten(t_philosopher *philosopher);
 

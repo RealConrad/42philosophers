@@ -6,11 +6,12 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:39:15 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/18 16:48:47 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 13:55:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <signal.h>
 
 int	main(int argc, char **argv)
 {

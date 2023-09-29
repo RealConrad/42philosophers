@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/17 13:19:14 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 13:46:44 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_philosopher {
 	t_simulation_data		*sim_data;
 	pthread_t				thread;
 	t_philosopher_state		state;
+	bool					has_finished_eating;
+	pthread_mutex_t			has_finished_eating_mutex;
 	pthread_mutex_t			time_since_last_meal_mutex;
 	pthread_mutex_t			state_change_mutex;
 	int						index;
@@ -96,7 +98,6 @@ void		philosopher_think(t_philosopher *philosopher);
 void		philosopher_try_eat(t_philosopher *philosopher);
 void		monitor_philosophers(t_simulation_state *simulation_context, int argc);
 void		update_number_of_times_eaten(t_philosopher *philosopher);
-int			check_if_eaten_enough(t_philosopher *philosopher);
 
 /* ************************************************************************** */
 /*                                 Free                                       */
@@ -141,14 +142,15 @@ void		unlock_right_fork(t_philosopher *philosopher);
 /* ************************************************************************** */
 /*                                 Eat Utils                                  */
 /* ************************************************************************** */
-void	lock_eat_counter_mutex(t_philosopher *philosopher);
-void	unlock_eat_counter_mutex(t_philosopher *philosopher);
+void		lock_has_eaten_flag(t_philosopher *philosopher);
+void		unlock_has_eaten_flag(t_philosopher *philosopher);
+
 
 /* ************************************************************************** */
 /*                                 State Utils                                */
 /* ************************************************************************** */
-void	lock_philosopher_state(t_philosopher *philosopher);
-void	unlock_philosopher_state(t_philosopher *philosopher);
+void		lock_philosopher_state(t_philosopher *philosopher);
+void		unlock_philosopher_state(t_philosopher *philosopher);
 
 
 #endif /* PHILOSOPHERS_H */

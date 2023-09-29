@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:03:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 15:03:30 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 13:57:21 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	free_philo_linked_list(t_philosopher *philosopher)
 	temp = philosopher;
 	while (true)
 	{
-		free(temp->sim_data);
-		free(temp);
+		// free(temp->sim_data);
+		// free(temp);
 		temp = temp->next;
 		if (temp == philosopher)
 			break ;

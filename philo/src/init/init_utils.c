@@ -6,13 +6,14 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:44:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/17 17:11:18 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 13:39:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 static bool	check_numeric(const char *str);
+static int	init_philosopher_mutexes(t_philosopher *philosopher);
 
 bool	check_input(int argc, char **argv)
 {
@@ -65,11 +66,21 @@ int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philos
 	new_philosopher->number_of_times_eaten = 0;
 	new_philosopher->index = index;
 	new_philosopher->time_since_last_meal = get_current_time();
+	new_philosopher->has_finished_eating = false;
 	new_philosopher->left_fork = &simulation_context->forks[index];
 	new_philosopher->right_fork = &simulation_context->forks[(index + 1) % new_philosopher->sim_data->philo_count];
-	if (pthread_mutex_init(&new_philosopher->time_since_last_meal_mutex, NULL))
+	if (init_philosopher_mutexes(new_philosopher) != SUCCESS)
 		return (ERROR);
-	if (pthread_mutex_init(&new_philosopher->state_change_mutex, NULL))
+	return (SUCCESS);
+}
+
+static int	init_philosopher_mutexes(t_philosopher *philosopher)
+{
+	if (pthread_mutex_init(&philosopher->time_since_last_meal_mutex, NULL) != SUCCESS)
+		return (ERROR);
+	if (pthread_mutex_init(&philosopher->state_change_mutex, NULL) != SUCCESS)
+		return (ERROR);
+	if (philosopher->sim_data->required_eat_times && pthread_mutex_init(&philosopher->has_finished_eating_mutex, NULL) != SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
 }

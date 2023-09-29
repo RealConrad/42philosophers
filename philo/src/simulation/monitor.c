@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:27 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 14:01:39 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 14:36:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ void	monitor_philosophers(t_simulation_state *simulation_context, int argc)
 	philosopher = simulation_context->philosphers;
 	simulation_context->num_philo_finished_eating = 0;
 	philo_count = philosopher->sim_data->philo_count;
-	printf("Philo count: %ld\n", philo_count);
 	while (true)
 	{
 		if (argc == 6)
 		{
 			lock_has_eaten_flag(philosopher);
-			if (philosopher->has_finished_eating)
+			if (philosopher->has_finished_eating && !philosopher->has_counted_philo)
+			{
 				simulation_context->num_philo_finished_eating++;
+				philosopher->has_counted_philo = true;
+			}
 			unlock_has_eaten_flag(philosopher);
 			if (simulation_context->num_philo_finished_eating >= philo_count)
 				return ;

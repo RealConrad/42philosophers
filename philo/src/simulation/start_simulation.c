@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:37:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/18 17:19:19 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 17:37:36 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	*begin_simulation(void *arg)
 		else
 			handle_odd_total_philosophers(philosopher);
 	}
-	// printf("---------------Philo [%d] ate: %d\n", philosopher->index, philosopher->number_of_times_eaten);
 	return (NULL);
 }
 

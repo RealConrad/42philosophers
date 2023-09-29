@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:23:49 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 14:00:21 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 14:38:03 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	philosopher_try_eat(t_philosopher *philosopher)
 	change_philosopher_state(philosopher, EATING);
 	print_philosopher_state(philosopher);
 	update_time_since_last_meal(philosopher);
-	update_number_of_times_eaten(philosopher);
 	wait_for_duration(philosopher->sim_data->time_to_eat);
+	update_number_of_times_eaten(philosopher);
 	unlock_forks(philosopher);
 }
 

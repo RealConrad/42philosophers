@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:16:23 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 17:28:57 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/29 16:57:29 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 	long long		start_time_ms;
 	int 			i;
 
-	i = 0;
+	i = 1;
 	start_time_ms = get_current_time();
-	while (i < (int)atol(argv[0]))
+	while (i <= (int)atol(argv[0]))
 	{
 		new_philosopher = malloc(sizeof(t_philosopher));
 		if (!new_philosopher)

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:09:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/16 17:33:29 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/09/30 16:44:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	wait_for_duration(long wait_time)
 		elapsed_time = get_current_time() - start_time;
 		if (elapsed_time >= wait_time)
 			return ;
-		usleep(500);
+		usleep(100);
 	}
 }
 

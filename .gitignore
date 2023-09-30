@@ -3,3 +3,5 @@ philo/philo
 .build
 test.c
 a.out
+
+OLD_philo/

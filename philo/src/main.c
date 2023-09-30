@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 15:39:15 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/29 13:55:53 by cwenz            ###   ########.fr       */
+/*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
+/*   Updated: 2023/09/30 16:40:11 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <signal.h>
 
 int	main(int argc, char **argv)
 {
@@ -20,11 +19,9 @@ int	main(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 		return (printf("Invalid number of arguments.\n"), ERROR);
 	if (init_philos(&simulation_context, --argc, ++argv) != SUCCESS)
-		return (free_simulation(&simulation_context, "Failed to initialize philosophers  ¯\\_(ツ)_/¯", true), ERROR);
+		return (ERROR);
 
-	monitor_philosophers(&simulation_context, ++argc);
-	detach_threads(&simulation_context);
-	free_simulation(&simulation_context, "", false);
-	// printf("Shutting down now.... ¯\\_(ツ)_/¯ \n");
+	monitor_philosophers(&simulation_context);
+	// detach_threads(&simulation_context);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/09/29 16:55:05 by cwenz            ###   ########.fr        #
+#    Updated: 2023/09/30 16:27:21 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,24 +24,28 @@ BUILD_DIR		:= .build
 # Source
 SRC_DIR			:= ./src/
 INIT_DIR		:= ./src/init/
-UTIL_DIR		:= ./src/utils/
-SIM_DIR			:= ./src/simulation/
-FREE_DIR		:= ./src/free/
 TIME_DIR		:= ./src/time/
+UTIL_DIR		:= ./src/utils/
+MONITOR_DIR		:= ./src/monitor/
+SIM_DIR			:= ./src/simulation/
+PRINT_DIR		:= ./src/print/
 
 SRC_FILES		:= main.c
 INIT_FILES		:= init.c init_utils.c
-SIM_FILES		:= start_simulation.c fork.c simulation_utils.c monitor.c eat.c
+SIM_FILES		:= simulation.c simulation_utils.c forks.c
+MONITOR_FILES	:= monitor.c
 TIME_FILES		:= time.c
-UTIL_FILES		:= utils.c fork_utils.c state_utils.c time_utils.c eat_utils.c
-FREE_FILES		:= free_simulation.c
+UTIL_FILES		:= input_utils.c
+PRINT_FILES		:= print.c
+
 
 SRC 			+= $(addprefix $(SRC_DIR), $(SRC_FILES))
 SRC 			+= $(addprefix $(INIT_DIR), $(INIT_FILES))
-SRC 			+= $(addprefix $(UTIL_DIR), $(UTIL_FILES))
-SRC 			+= $(addprefix $(FREE_DIR), $(FREE_FILES))
-SRC 			+= $(addprefix $(SIM_DIR), $(SIM_FILES))
 SRC 			+= $(addprefix $(TIME_DIR), $(TIME_FILES))
+SRC 			+= $(addprefix $(UTIL_DIR), $(UTIL_FILES))
+SRC 			+= $(addprefix $(MONITOR_DIR), $(MONITOR_FILES))
+SRC 			+= $(addprefix $(SIM_DIR), $(SIM_FILES))
+SRC				+= $(addprefix $(PRINT_DIR), $(PRINT_FILES))
 
 # Objects
 ## patsubst replaces %.c with $(BUILD_DIR)/.o for every file in $(SRC),

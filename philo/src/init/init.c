@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/01 16:53:22 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/01 17:03:44 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t
 		philosopher->sim_data.required_eat_times = atol(argv[4]);
 	philosopher->eat_count = 0;
 	philosopher->exit_sim = false;
+	philosopher->eaten_enough = false;
 	init_var_mutexes(philosopher);
 	philosopher->start_mutex = &simulation_context->start_mutex;
 	philosopher->print_mutex = &simulation_context->print_mutex;

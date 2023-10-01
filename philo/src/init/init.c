@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/30 17:47:07 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/01 16:53:22 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 	i = 1;
 	pthread_mutex_init(&simulation_context->start_mutex, NULL);
 	pthread_mutex_lock(&simulation_context->start_mutex);
+	pthread_mutex_init(&simulation_context->print_mutex, NULL);
 	while (i <= (int)atol(argv[0]))
 	{
 		new_philosopher = malloc(sizeof(t_philosopher));
@@ -70,6 +71,7 @@ static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t
 	philosopher->exit_sim = false;
 	init_var_mutexes(philosopher);
 	philosopher->start_mutex = &simulation_context->start_mutex;
+	philosopher->print_mutex = &simulation_context->print_mutex;
 	philosopher->left_fork = simulation_context->forks[philosopher->index];
 	philosopher->right_fork = simulation_context->forks[(philosopher->index + 1) % philosopher->sim_data.philo_count];
 	return (SUCCESS);

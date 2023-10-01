@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/30 17:46:51 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/01 16:52:22 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_philosopher {
 	pthread_t				thread;
 	pthread_mutex_t			eat_count_mutex;
 	pthread_mutex_t			*start_mutex;
+	pthread_mutex_t			*print_mutex;
 	int						index;
 	bool					exit_sim;
 	int						eat_count;
@@ -82,6 +83,7 @@ typedef struct s_simulation_state {
 	t_philosopher	*philosphers;
 	t_fork			*forks;
 	pthread_mutex_t	start_mutex;
+	pthread_mutex_t	print_mutex;
 }	t_simulation_state;
 
 
@@ -92,6 +94,7 @@ typedef struct s_simulation_state {
 void		*begin_simulation(void *arg);
 void		philosopher_eat(t_philosopher *philosopher);
 void		philosopher_sleep(t_philosopher *philosopher);
+void		update_number_of_times_eaten(t_philosopher *philosopher);
 void		lock_forks(t_philosopher *philosopher);
 void		unlock_forks(t_philosopher *philosopher);
 

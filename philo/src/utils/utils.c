@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/02 15:19:44 by cwenz            ###   ########.fr       */
+/*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
+/*   Updated: 2023/10/01 19:08:07 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+void	detach_threads(t_simulation_state *simulation_context)
 {
-	t_simulation_state	simulation_context = {0};
+	t_philosopher *temp;
 
-	if (argc != 5 && argc != 6)
-		return (printf("Invalid number of arguments.\n"), ERROR);
-	if (init_philos(&simulation_context, --argc, ++argv) != SUCCESS)
-		return (ERROR);
-
-	monitor_philosophers(&simulation_context);
-	detach_threads(&simulation_context);
-	pthread_mutex_unlock(&simulation_context.print_mutex);
-	return (SUCCESS);
+	temp = simulation_context->philosphers;
+	while (true)
+	{
+		// printf("--------------- Philo [%d] ate: %d\n", temp->index, temp->eat_count);
+		temp = temp->next;
+		if (temp->thread)
+			pthread_detach(temp->thread);
+		if (temp == simulation_context->philosphers)
+			break;
+	}
 }

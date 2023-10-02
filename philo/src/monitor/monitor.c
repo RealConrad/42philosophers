@@ -6,34 +6,36 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:36:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/01 17:39:11 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/01 18:59:08 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 static int	check_eat_count(t_philosopher *philosopher, t_simulation_state *simulation_context);
+static int	should_philosopher_die(t_philosopher *philosopher);
 
 void	monitor_philosophers(t_simulation_state *simulation_context)
 {
-	t_philosopher	*temp;
+	t_philosopher	*philosopher;
 
-	temp = simulation_context->philosphers;
+	philosopher = simulation_context->philosphers;
 	simulation_context->num_finished_eating = 0;
 	pthread_mutex_unlock(&simulation_context->start_mutex);
 	while (true)
 	{
-		if (temp->sim_data.required_eat_times && check_eat_count(temp, simulation_context) != SUCCESS)
+		if (philosopher->sim_data.required_eat_times && check_eat_count(philosopher, simulation_context) != SUCCESS)
 		{
 			pthread_mutex_lock(&simulation_context->print_mutex);
 			return ;
 		}
-		// if (temp->time_since_last_meal > temp->sim_data.time_to_die)
-		// {
-		// 	pthread_mutex_lock(&simulation_context->print_mutex);
-		// 	return ;
-		// }
-		temp = temp->next;
+		if (should_philosopher_die(philosopher) != SUCCESS)
+		{
+			print_philosopher_state(philosopher, DEATH);
+			pthread_mutex_lock(&simulation_context->print_mutex);
+			return ;
+		}
+		philosopher = philosopher->next;
 	}
 }
 
@@ -49,4 +51,13 @@ static int	check_eat_count(t_philosopher *philosopher, t_simulation_state *simul
 	}
 	pthread_mutex_unlock(&philosopher->eat_count_mutex);
 	return (SUCCESS);
+}
+
+static int	should_philosopher_die(t_philosopher *philosopher)
+{
+	pthread_mutex_lock(&philosopher->time_since_last_meal_mutex);
+	if (get_time_difference(philosopher->time_since_last_meal) > philosopher->sim_data.time_to_die)
+		return (ERROR);
+	pthread_mutex_unlock(&philosopher->time_since_last_meal_mutex);
+	return (SUCCESS);	
 }

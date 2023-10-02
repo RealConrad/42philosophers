@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/30 17:47:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/01 18:47:25 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ void	*begin_simulation(void *arg)
 {
 	t_philosopher	*philosopher;
 	bool			is_even;
+	long long		time;
 
 	philosopher = (t_philosopher *)arg;
 	is_even = philosopher->sim_data.philo_count % 2 == EVEN;
 	pthread_mutex_lock(philosopher->start_mutex);
 	pthread_mutex_unlock(philosopher->start_mutex);
-	philosopher->start_time_ms = get_current_time();
+	time = get_current_time();
+	philosopher->start_time_ms = time;
+	philosopher->time_since_last_meal = time;
 	if (is_even)
 		handle_even_total(philosopher);
 	else

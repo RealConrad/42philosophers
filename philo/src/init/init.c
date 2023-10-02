@@ -6,13 +6,13 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/01 17:03:44 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/01 18:50:18 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	init_var_mutexes(t_philosopher *philosopher);
+static int	init_philo_mutexes(t_philosopher *philosopher, t_simulation_state *simulation_context);
 static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philosopher *philosopher, char **argv);
 static int	init_philo_linked_list(t_simulation_state *simulation_context, char **argv);
 
@@ -52,13 +52,6 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 	return (SUCCESS);
 }
 
-static int	init_var_mutexes(t_philosopher *philosopher)
-{
-	if (pthread_mutex_init(&philosopher->eat_count_mutex, NULL) != SUCCESS)
-		return (ERROR);
-	return (SUCCESS);
-}
-
 static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philosopher *philosopher, char **argv)
 {
 	philosopher->sim_data.philo_count = atol(argv[0]);
@@ -70,7 +63,17 @@ static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t
 	philosopher->eat_count = 0;
 	philosopher->exit_sim = false;
 	philosopher->eaten_enough = false;
-	init_var_mutexes(philosopher);
+	philosopher->time_since_last_meal = get_current_time();
+	init_philo_mutexes(philosopher, simulation_context);
+	return (SUCCESS);
+}
+
+static int	init_philo_mutexes(t_philosopher *philosopher, t_simulation_state *simulation_context)
+{
+	if (pthread_mutex_init(&philosopher->eat_count_mutex, NULL) != SUCCESS)
+		return (ERROR);
+	if (pthread_mutex_init(&philosopher->time_since_last_meal_mutex, NULL) != SUCCESS)
+		return (ERROR);
 	philosopher->start_mutex = &simulation_context->start_mutex;
 	philosopher->print_mutex = &simulation_context->print_mutex;
 	philosopher->left_fork = simulation_context->forks[philosopher->index];

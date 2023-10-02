@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/09/30 16:27:21 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/01 19:06:14 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ INIT_FILES		:= init.c init_utils.c
 SIM_FILES		:= simulation.c simulation_utils.c forks.c
 MONITOR_FILES	:= monitor.c
 TIME_FILES		:= time.c
-UTIL_FILES		:= input_utils.c
+UTIL_FILES		:= input_utils.c utils.c
 PRINT_FILES		:= print.c
 
 

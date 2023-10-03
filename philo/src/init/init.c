@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/01 18:50:18 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 15:37:14 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 	int 			i;
 
 	i = 1;
-	pthread_mutex_init(&simulation_context->start_mutex, NULL);
-	pthread_mutex_lock(&simulation_context->start_mutex);
+	pthread_mutex_init(&simulation_context->shared_mutex, NULL);
+	pthread_mutex_lock(&simulation_context->shared_mutex);
 	pthread_mutex_init(&simulation_context->print_mutex, NULL);
 	while (i <= (int)atol(argv[0]))
 	{
@@ -70,11 +70,10 @@ static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t
 
 static int	init_philo_mutexes(t_philosopher *philosopher, t_simulation_state *simulation_context)
 {
-	if (pthread_mutex_init(&philosopher->eat_count_mutex, NULL) != SUCCESS)
+	if (pthread_mutex_init(&philosopher->philo_mutex, NULL) != SUCCESS)
 		return (ERROR);
-	if (pthread_mutex_init(&philosopher->time_since_last_meal_mutex, NULL) != SUCCESS)
-		return (ERROR);
-	philosopher->start_mutex = &simulation_context->start_mutex;
+	pthread_mutex_init(&philosopher->exit_sim_mutex, NULL);
+	philosopher->shared_mutex = &simulation_context->shared_mutex;
 	philosopher->print_mutex = &simulation_context->print_mutex;
 	philosopher->left_fork = simulation_context->forks[philosopher->index];
 	philosopher->right_fork = simulation_context->forks[(philosopher->index + 1) % philosopher->sim_data.philo_count];

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/01 19:05:57 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 15:36:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ typedef struct s_philosopher {
 	t_fork					right_fork;
 	t_simulation_data		sim_data;
 	pthread_t				thread;
-	pthread_mutex_t			eat_count_mutex;
-	pthread_mutex_t			*start_mutex;
+	pthread_mutex_t			philo_mutex;
+	pthread_mutex_t			exit_sim_mutex;
+	pthread_mutex_t			*shared_mutex;
 	pthread_mutex_t			*print_mutex;
-	pthread_mutex_t			time_since_last_meal_mutex;
 	int						index;
 	bool					exit_sim;
 	bool					eaten_enough;
@@ -85,7 +85,7 @@ typedef struct s_simulation_state {
 	t_philosopher	*philosphers;
 	t_fork			*forks;
 	long			num_finished_eating;
-	pthread_mutex_t	start_mutex;
+	pthread_mutex_t	shared_mutex;
 	pthread_mutex_t	print_mutex;
 }	t_simulation_state;
 
@@ -139,5 +139,8 @@ bool		check_input(int argc, char **argv);
 /* -------------------------------------------------------------------------- */
 
 void	detach_threads(t_simulation_state *simulation_context);
+void	join_threads(t_simulation_state *simulation_context);
+bool	check_philo_sim_exit(t_philosopher *philosopher);
+void	exit_all_threads(t_simulation_state *simulation_context);
 
 #endif /* PHILOSOPHERS_H */

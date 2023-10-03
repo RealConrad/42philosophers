@@ -2,5 +2,7 @@
 	"files.associations": {
 		"philosophers.h": "c",
 		"chrono": "c"
-	}
+	},
+	"C_Cpp.intelliSenseEngineFallback": "enabled",
+	"C_Cpp.errorSquiggles": "enabled"
 }

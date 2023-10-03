@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 15:40:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:58:41 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ static void	handle_even_total(t_philosopher *philosopher)
 			philosopher_eat(philosopher);
 			philosopher_sleep(philosopher);
 
-			pthread_mutex_lock(philosopher->print_mutex);
+			pthread_mutex_lock(philosopher->shared_mutex);
 			print_philosopher_state(philosopher, THINKING);
-			pthread_mutex_unlock(philosopher->print_mutex);
+			pthread_mutex_unlock(philosopher->shared_mutex);
 		}
 		else
 		{
 			philosopher_sleep(philosopher);
 			philosopher_eat(philosopher);
 
-			pthread_mutex_lock(philosopher->print_mutex);
+			pthread_mutex_lock(philosopher->shared_mutex);
 			print_philosopher_state(philosopher, THINKING);
-			pthread_mutex_unlock(philosopher->print_mutex);
+			pthread_mutex_unlock(philosopher->shared_mutex);
 		}
 	}
 }

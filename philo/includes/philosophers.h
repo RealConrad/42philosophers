@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 16:42:45 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:58:31 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_philosopher {
 	pthread_mutex_t			philo_mutex;
 	pthread_mutex_t			exit_sim_mutex;
 	pthread_mutex_t			*shared_mutex;
-	pthread_mutex_t			*print_mutex;
 	int						index;
 	bool					exit_sim;
 	bool					eaten_enough;
@@ -81,7 +80,6 @@ typedef struct s_simulation_state {
 	t_fork			*forks;
 	long			num_finished_eating;
 	pthread_mutex_t	shared_mutex;
-	pthread_mutex_t	print_mutex;
 }	t_simulation_state;
 
 

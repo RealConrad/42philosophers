@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:36:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 16:46:44 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:58:35 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void	monitor_philosophers(t_simulation_state *simulation_context)
 	{
 		if (philosopher->sim_data.required_eat_times && check_eat_count(philosopher, simulation_context) != SUCCESS)
 		{
-			pthread_mutex_lock(&simulation_context->print_mutex);
+			pthread_mutex_lock(&simulation_context->shared_mutex);
 			exit_all_threads(simulation_context);
-			pthread_mutex_unlock(&simulation_context->print_mutex);
+			pthread_mutex_unlock(&simulation_context->shared_mutex);
 			return ;
 		}
 		if (should_philosopher_die(philosopher) != SUCCESS)
 		{
-			pthread_mutex_lock(&simulation_context->print_mutex);
+			pthread_mutex_lock(&simulation_context->shared_mutex);
 			print_philosopher_state(philosopher, DEATH);
 			exit_all_threads(simulation_context);
-			pthread_mutex_unlock(&simulation_context->print_mutex);
+			pthread_mutex_unlock(&simulation_context->shared_mutex);
 			return ;
 		}
 		philosopher = philosopher->next;

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 16:40:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:46:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	main(int argc, char **argv)
 
 	monitor_philosophers(&simulation_context);
 	join_threads(&simulation_context);
-	pthread_mutex_unlock(&simulation_context.print_mutex);
+	// pthread_mutex_unlock(&simulation_context.print_mutex);
 	free_memory(&simulation_context, "", false);
+	printf("\n\n\033[32mFinished simulation!\033[0m");
 	return (SUCCESS);
 }

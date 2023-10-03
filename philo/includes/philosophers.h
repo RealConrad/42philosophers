@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 15:36:55 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:42:45 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@
 # include <limits.h>
 # include <sys/time.h>
 
-/* ************************************************************************** */
-/*                                 Macro's                                    */
-/* ************************************************************************** */
+/* --------------------------------- Macros --------------------------------- */
 # define SUCCESS 0
 # define ERROR -1
 # define ATE_ENOUGH 2
@@ -35,10 +33,7 @@
 # define THINKING_TEXT "is thinking"
 # define DEATH_TEXT "died"
 
-/* ************************************************************************** */
-/*                                 Typedefs                                   */
-/* ************************************************************************** */
-
+/* -------------------------------- Typedefs -------------------------------- */
 typedef enum e_philosopher_state {
 	IDLE,
 	TAKEN_FORK,
@@ -90,57 +85,38 @@ typedef struct s_simulation_state {
 }	t_simulation_state;
 
 
-/* -------------------------------------------------------------------------- */
-/*                                 Simulation                                 */
-/* -------------------------------------------------------------------------- */
-
+/* ------------------------------- Simulation ------------------------------- */
 void		*begin_simulation(void *arg);
 void		philosopher_eat(t_philosopher *philosopher);
 void		philosopher_sleep(t_philosopher *philosopher);
 void		lock_forks(t_philosopher *philosopher);
 void		unlock_forks(t_philosopher *philosopher);
 
-/* -------------------------------------------------------------------------- */
-/*                                   Monitor                                  */
-/* -------------------------------------------------------------------------- */
-
+/* --------------------------------- Monitor -------------------------------- */
 void		monitor_philosophers(t_simulation_state *simulation_context);
 
-/* -------------------------------------------------------------------------- */
-/*                                    Print                                   */
-/* -------------------------------------------------------------------------- */
+/* ---------------------------------- Print --------------------------------- */
 void		print_philosopher_state(t_philosopher *philosopher, t_philosopher_state state);
 
-/* -------------------------------------------------------------------------- */
-/*                                    Init                                    */
-/* -------------------------------------------------------------------------- */
-
+/* ---------------------------------- Init ---------------------------------- */
 int			init_philos(t_simulation_state *simulation_context, int argc, char **argv);
 void		add_philosopher_to_linked_list(t_simulation_state *simulation_context, t_philosopher *node);
 int			init_forks(t_simulation_state *simulation_context, char **argv);
 
-/* -------------------------------------------------------------------------- */
-/*                                    Time                                    */
-/* -------------------------------------------------------------------------- */
-
+/* ---------------------------------- Time ---------------------------------- */
 void		wait_for_duration(long wait_time);
 long long	get_time_difference(long long start_time_ms);
 long long	get_current_time(void);
 
-/* -------------------------------------------------------------------------- */
-/*                                    Utils                                   */
-/* -------------------------------------------------------------------------- */
+/* ---------------------------------- Free ---------------------------------- */
+void	free_memory(t_simulation_state *simulation_context, const char *error_msg, bool display_error);
 
+/* ---------------------------------- Utils ---------------------------------- */
 long		atol(const char *str);
 bool		check_input(int argc, char **argv);
-
-/* -------------------------------------------------------------------------- */
-/*                                    Utils                                   */
-/* -------------------------------------------------------------------------- */
-
-void	detach_threads(t_simulation_state *simulation_context);
-void	join_threads(t_simulation_state *simulation_context);
-bool	check_philo_sim_exit(t_philosopher *philosopher);
-void	exit_all_threads(t_simulation_state *simulation_context);
+void		detach_threads(t_simulation_state *simulation_context);
+void		join_threads(t_simulation_state *simulation_context);
+bool		check_philo_sim_exit(t_philosopher *philosopher);
+void		exit_all_threads(t_simulation_state *simulation_context);
 
 #endif /* PHILOSOPHERS_H */

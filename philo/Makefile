@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/10/03 16:37:40 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/03 17:26:43 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME			:= philo
 
 # Compiler and flags
 CC				:= cc
-CFLAGS			:= -Wall -Werror -Wextra -pthread
+CFLAGS			:= -Wall -Werror -Wextra -pthread 
 INCLUDES		:= -I./includes
 
 # Directories

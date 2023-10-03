@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 16:51:21 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 17:05:41 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	join_threads(t_simulation_state *simulation_context)
 	temp = simulation_context->philosphers;
 	while (true)
 	{
-		printf("Philo[%d] joining...\n", temp->index);
+		// printf("Philo[%d] joining...\n", temp->index);
 		if (temp->thread)
 			pthread_join(temp->thread, NULL);
 		temp = temp->next;

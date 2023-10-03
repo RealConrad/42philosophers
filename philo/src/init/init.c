@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 16:59:50 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 17:34:41 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 	i = 1;
 	pthread_mutex_init(&simulation_context->shared_mutex, NULL);
 	pthread_mutex_lock(&simulation_context->shared_mutex);
+	simulation_context->start_time_ms = 0;
 	while (i <= (int)atol(argv[0]))
 	{
 		new_philosopher = malloc(sizeof(t_philosopher));
@@ -60,6 +61,7 @@ static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t
 	if (argv[4])
 		philosopher->sim_data.required_eat_times = atol(argv[4]);
 	philosopher->eat_count = 0;
+	philosopher->start_time_ms = &simulation_context->start_time_ms;
 	philosopher->exit_sim = false;
 	philosopher->eaten_enough = false;
 	philosopher->time_since_last_meal = get_current_time();

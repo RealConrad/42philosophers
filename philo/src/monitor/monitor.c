@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:36:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 16:58:35 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 17:33:15 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	monitor_philosophers(t_simulation_state *simulation_context)
 
 	philosopher = simulation_context->philosphers;
 	simulation_context->num_finished_eating = 0;
+	simulation_context->start_time_ms = get_current_time();
 	pthread_mutex_unlock(&simulation_context->shared_mutex);
 	while (true)
 	{

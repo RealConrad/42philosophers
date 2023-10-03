@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 16:50:52 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:51:21 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	detach_threads(t_simulation_state *simulation_context)
 
 void	join_threads(t_simulation_state *simulation_context)
 {
-	t_philosopher *temp;
+	t_philosopher	*temp;
 
 	temp = simulation_context->philosphers;
 	while (true)

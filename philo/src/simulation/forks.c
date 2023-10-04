@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:22:39 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/30 16:28:19 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/04 09:16:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,6 @@ void	lock_forks(t_philosopher *philosopher)
 
 void	unlock_forks(t_philosopher *philosopher)
 {
-	if (philosopher->index % 2 == EVEN)
-	{
-		pthread_mutex_unlock(&philosopher->left_fork.mutex);
-		pthread_mutex_unlock(&philosopher->right_fork.mutex);
-	}
-	else
-	{
-		pthread_mutex_unlock(&philosopher->right_fork.mutex);
-		pthread_mutex_unlock(&philosopher->left_fork.mutex);
-	}
+	pthread_mutex_unlock(&philosopher->left_fork.mutex);
+	pthread_mutex_unlock(&philosopher->right_fork.mutex);
 }

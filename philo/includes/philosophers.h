@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 17:30:16 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/03 18:32:54 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	free_memory(t_simulation_state *simulation_context, const char *error_msg, 
 /* ---------------------------------- Utils ---------------------------------- */
 long		atol(const char *str);
 bool		check_input(int argc, char **argv);
-void		detach_threads(t_simulation_state *simulation_context);
 void		join_threads(t_simulation_state *simulation_context);
 bool		check_philo_sim_exit(t_philosopher *philosopher);
 void		exit_all_threads(t_simulation_state *simulation_context);

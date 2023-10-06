@@ -6,21 +6,18 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:49:56 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:20:49 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:33:00 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	free_memory(t_simulation_state *simulation_context,
-			const char *error_msg, bool display_error)
+void	free_memory(t_simulation_state *simulation_context)
 {
 	t_philosopher	*philosopher;
 	t_philosopher	*next_philosopher;
 
 	philosopher = simulation_context->philosphers;
-	if (display_error)
-		printf("Error:\n%s\n", error_msg);
 	pthread_mutex_destroy(&simulation_context->shared_mutex);
 	while (true)
 	{

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:08:32 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:15:34 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:35:49 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	add_philosopher_to_linked_list(t_simulation_state *simulation_context,
 {
 	t_philosopher	*tail;
 
-	node->left_fork = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(node->left_fork, NULL);
 	if (!simulation_context->philosphers)
 	{
 		node->next = node;

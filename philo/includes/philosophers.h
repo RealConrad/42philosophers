@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:25:42 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:57:54 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ typedef enum e_philosopher_state {
 	FINISHED_EATING,
 	DEATH
 }	t_philosopher_state;
+
+typedef enum e_error_type {
+	ERR_MUTEX_INITIALIZATION,
+	ERR_THREAD_CREATION,
+	ERR_INVALID_ARG,
+	ERR_MEMORY_ALLOCATION
+} t_error_type;
+
 
 typedef struct s_simulation_data {
 	long	philo_count;
@@ -105,8 +113,10 @@ long long	get_time_difference(long long start_time_ms);
 long long	get_current_time(void);
 
 /* ---------------------------------- Free ---------------------------------- */
-void		free_memory(t_simulation_state *simulation_context,
-				const char *error_msg, bool display_error);
+void		free_memory(t_simulation_state *simulation_context);
+
+/* ---------------------------------- Error --------------------------------- */
+void	display_error(t_error_type error_type);
 
 /* ---------------------------------- Utils --------------------------------- */
 long		atol(const char *str);

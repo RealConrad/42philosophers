@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:21:19 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:56:07 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	create_threads(t_simulation_state *simulation_context);
 int	init_philos(t_simulation_state *simulation_context, int argc, char **argv)
 {
 	if (!check_input(argc, argv))
-		return (ERROR);
+		return (display_error(ERR_INVALID_ARG), ERROR);
 	if (init_philo_linked_list(simulation_context, argv) != SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
@@ -43,7 +43,7 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context,
 	{
 		philosopher = malloc(sizeof(t_philosopher));
 		if (!philosopher)
-			return (ERROR);
+			return (display_error(ERR_MEMORY_ALLOCATION), ERROR);
 		philosopher->index = i;
 		if (assign_new_philosopher_data(simulation_context, philosopher, argv)
 			!= SUCCESS)
@@ -70,7 +70,8 @@ static int	assign_new_philosopher_data(t_simulation_state *simulation_context,
 	philosopher->exit_sim = false;
 	philosopher->eaten_enough = false;
 	philosopher->time_since_last_meal = get_current_time();
-	init_philo_mutexes(philosopher, simulation_context);
+	if (init_philo_mutexes(philosopher, simulation_context) != SUCCESS)
+		return (display_error(ERR_MUTEX_INITIALIZATION), ERROR);
 	return (SUCCESS);
 }
 
@@ -78,6 +79,11 @@ static int	init_philo_mutexes(t_philosopher *philosopher,
 				t_simulation_state *simulation_context)
 {
 	if (pthread_mutex_init(&philosopher->philo_mutex, NULL) != SUCCESS)
+		return (ERROR);
+	philosopher->left_fork = malloc(sizeof(pthread_mutex_t));
+	if (!philosopher->left_fork)
+		return (ERROR);
+	if (pthread_mutex_init(philosopher->left_fork, NULL) != SUCCESS)
 		return (ERROR);
 	philosopher->shared_mutex = &simulation_context->shared_mutex;
 	return (SUCCESS);
@@ -93,7 +99,7 @@ static int	create_threads(t_simulation_state *simulation_context)
 		if (pthread_create(&philosopher->thread, NULL,
 				*begin_simulation, philosopher)
 			!= SUCCESS)
-			return (ERROR);
+			return (display_error(ERR_THREAD_CREATION), ERROR);
 		philosopher = philosopher->next;
 		if (philosopher == simulation_context->philosphers)
 			return (SUCCESS);

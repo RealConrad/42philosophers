@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:07:42 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:53:14 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,16 @@ void	exit_all_threads(t_simulation_state *simulation_context)
 		if (philosopher == simulation_context->philosphers)
 			return ;
 	}
+}
+
+void	display_error(t_error_type error_type)
+{
+	if (error_type == ERR_MUTEX_INITIALIZATION)
+		printf("Error:\nFailed to initialize mutexes.\n");
+	else if (error_type == ERR_INVALID_ARG)
+		printf("Error:\nInvalid command line arguments.\n");
+	else if (error_type == ERR_MEMORY_ALLOCATION)
+		printf("Error:\nMalloc call failed.\n");
+	else if (error_type == ERR_THREAD_CREATION)
+		printf("Error:\nFailed to create threads.\n");
 }

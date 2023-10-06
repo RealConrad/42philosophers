@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 15:30:11 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:10:51 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_simulation_state {
 void		*begin_simulation(void *arg);
 void		philosopher_eat(t_philosopher *philosopher);
 void		philosopher_sleep(t_philosopher *philosopher);
+void		philosopher_think(t_philosopher *philosopher);
 void		lock_forks(t_philosopher *philosopher);
 void		unlock_forks(t_philosopher *philosopher);
 void		update_philo_eat_data(t_philosopher *philosopher);

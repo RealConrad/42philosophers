@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:15:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/04 10:39:16 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:11:20 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	philosopher_eat(t_philosopher *philosopher)
 {
 	lock_forks(philosopher);
-	
 	pthread_mutex_lock(philosopher->shared_mutex);
 	print_philosopher_state(philosopher, EATING);
 	pthread_mutex_unlock(philosopher->shared_mutex);
@@ -29,7 +28,6 @@ void	philosopher_sleep(t_philosopher *philosopher)
 	pthread_mutex_lock(philosopher->shared_mutex);
 	print_philosopher_state(philosopher, SLEEPING);
 	pthread_mutex_unlock(philosopher->shared_mutex);
-
 	wait_for_duration(philosopher->sim_data.time_to_sleep);
 }
 
@@ -39,4 +37,11 @@ void	update_philo_eat_data(t_philosopher *philosopher)
 	philosopher->eat_count++;
 	philosopher->time_since_last_meal = get_current_time();
 	pthread_mutex_unlock(&philosopher->philo_mutex);
+}
+
+void	philosopher_think(t_philosopher *philosopher)
+{
+	pthread_mutex_lock(philosopher->shared_mutex);
+	print_philosopher_state(philosopher, THINKING);
+	pthread_mutex_unlock(philosopher->shared_mutex);
 }

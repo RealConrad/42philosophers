@@ -6,13 +6,16 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 17:11:46 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 18:35:18 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// HANDLE 1 PHILO!!
+/* 
+Death Time (Even): time_to_eat + time_to_sleep + 10
+Death Time (Odd): (time_to_eat * 2) + time_to_sleep + 10
+*/
 int	main(int argc, char **argv)
 {
 	t_simulation_state	simulation_context;

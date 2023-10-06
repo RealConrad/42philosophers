@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:53:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/30 12:53:42 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:08:28 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static bool	check_numeric(const char *str);
 
-long atol(const char *str)
+long	atol(const char *str)
 {
-	long num;
-	int i;
+	long	num;
+	int		i;
 
 	i = 0;
 	num = 0;
@@ -48,7 +48,7 @@ static bool	check_numeric(const char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (false);

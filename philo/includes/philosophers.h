@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:10:51 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:25:42 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_simulation_state {
 	long			num_finished_eating;
 }	t_simulation_state;
 
-
 /* ------------------------------- Simulation ------------------------------- */
 void		*begin_simulation(void *arg);
 void		philosopher_eat(t_philosopher *philosopher);
@@ -90,11 +89,14 @@ void		update_philo_eat_data(t_philosopher *philosopher);
 void		monitor_philosophers(t_simulation_state *simulation_context);
 
 /* ---------------------------------- Print --------------------------------- */
-void		print_philosopher_state(t_philosopher *philosopher, t_philosopher_state state);
+void		print_philosopher_state(t_philosopher *philosopher,
+				t_philosopher_state state);
 
 /* ---------------------------------- Init ---------------------------------- */
-int			init_philos(t_simulation_state *simulation_context, int argc, char **argv);
-void		add_philosopher_to_linked_list(t_simulation_state *simulation_context, t_philosopher *node);
+int			init_philos(t_simulation_state *simulation_context, int argc,
+				char **argv);
+void		add_philosopher_to_linked_list(
+				t_simulation_state *simulation_context, t_philosopher *node);
 int			init_forks(t_simulation_state *simulation_context, char **argv);
 
 /* ---------------------------------- Time ---------------------------------- */
@@ -103,9 +105,10 @@ long long	get_time_difference(long long start_time_ms);
 long long	get_current_time(void);
 
 /* ---------------------------------- Free ---------------------------------- */
-void	free_memory(t_simulation_state *simulation_context, const char *error_msg, bool display_error);
+void		free_memory(t_simulation_state *simulation_context,
+				const char *error_msg, bool display_error);
 
-/* ---------------------------------- Utils ---------------------------------- */
+/* ---------------------------------- Utils --------------------------------- */
 long		atol(const char *str);
 bool		check_input(int argc, char **argv);
 void		join_threads(t_simulation_state *simulation_context);

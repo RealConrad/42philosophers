@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/10/06 15:42:40 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/06 16:26:43 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ fclean: clean
 re: fclean all
 
 norm:
-	norminette src/
+	norminette -R ForbiddenSourceHeaders
 
 .PHONY: all clean fclean re norm
 

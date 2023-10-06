@@ -6,13 +6,14 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:36:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 14:57:36 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:14:10 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	check_eat_count(t_philosopher *philosopher, t_simulation_state *simulation_context);
+static int	check_eat_count(t_philosopher *philosopher,
+				t_simulation_state *simulation_context);
 static int	should_philosopher_die(t_philosopher *philosopher);
 
 void	monitor_philosophers(t_simulation_state *simulation_context)
@@ -25,7 +26,8 @@ void	monitor_philosophers(t_simulation_state *simulation_context)
 	pthread_mutex_unlock(&simulation_context->shared_mutex);
 	while (true)
 	{
-		if (philosopher->sim_data.required_eat_times && check_eat_count(philosopher, simulation_context) != SUCCESS)
+		if (philosopher->sim_data.required_eat_times
+			&& check_eat_count(philosopher, simulation_context) != SUCCESS)
 		{
 			pthread_mutex_lock(&simulation_context->shared_mutex);
 			return ;
@@ -40,14 +42,17 @@ void	monitor_philosophers(t_simulation_state *simulation_context)
 	}
 }
 
-static int	check_eat_count(t_philosopher *philosopher, t_simulation_state *simulation_context)
+static int	check_eat_count(t_philosopher *philosopher,
+	t_simulation_state *simulation_context)
 {
 	pthread_mutex_lock(&philosopher->philo_mutex);
-	if (philosopher->eat_count == philosopher->sim_data.required_eat_times && !philosopher->eaten_enough)
+	if (philosopher->eat_count == philosopher->sim_data.required_eat_times
+		&& !philosopher->eaten_enough)
 	{
 		philosopher->eaten_enough = true;
 		simulation_context->num_finished_eating++;
-		if (simulation_context->num_finished_eating == philosopher->sim_data.philo_count)
+		if (simulation_context->num_finished_eating
+			== philosopher->sim_data.philo_count)
 		{
 			pthread_mutex_unlock(&philosopher->philo_mutex);
 			return (ERROR);
@@ -60,11 +65,12 @@ static int	check_eat_count(t_philosopher *philosopher, t_simulation_state *simul
 static int	should_philosopher_die(t_philosopher *philosopher)
 {
 	pthread_mutex_lock(&philosopher->philo_mutex);
-	if (get_time_difference(philosopher->time_since_last_meal) > philosopher->sim_data.time_to_die)
+	if (get_time_difference(philosopher->time_since_last_meal)
+		> philosopher->sim_data.time_to_die)
 	{
 		pthread_mutex_unlock(&philosopher->philo_mutex);
 		return (ERROR);
 	}
 	pthread_mutex_unlock(&philosopher->philo_mutex);
-	return (SUCCESS);	
+	return (SUCCESS);
 }

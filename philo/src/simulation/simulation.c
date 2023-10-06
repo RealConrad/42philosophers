@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 13:25:28 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 13:41:32 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ static void	handle_simulation(t_philosopher *philosopher);
 void	*begin_simulation(void *arg)
 {
 	t_philosopher	*philosopher;
-	bool			is_even;
 
 	philosopher = (t_philosopher *)arg;
-	is_even = philosopher->sim_data.philo_count % 2 == EVEN;
 	pthread_mutex_lock(philosopher->shared_mutex);
 	pthread_mutex_unlock(philosopher->shared_mutex);
 	handle_simulation(philosopher);
@@ -34,7 +32,7 @@ static void	handle_simulation(t_philosopher *philosopher)
 	pthread_mutex_lock(philosopher->shared_mutex);
 	print_philosopher_state(philosopher, THINKING);
 	pthread_mutex_unlock(philosopher->shared_mutex);
-	if (philosopher->index % 2 == EVEN)
+	if (philosopher->index % 2 == ODD)
 	{
 		philosopher_eat(philosopher);
 		philosopher_sleep(philosopher);
@@ -49,6 +47,7 @@ static void	handle_simulation(t_philosopher *philosopher)
 		print_philosopher_state(philosopher, THINKING);
 		pthread_mutex_unlock(philosopher->shared_mutex);
 	}
+	
 	while (true)
 	{
 		if (check_philo_sim_exit(philosopher))

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 14:49:05 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:29:16 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,10 @@ void	join_threads(t_simulation_state *simulation_context)
 	temp = simulation_context->philosphers;
 	while (true)
 	{
-		printf("Philo[%d] joining...\n", temp->index);
 		pthread_join(temp->thread, NULL);
 		temp = temp->next;
 		if (temp == simulation_context->philosphers)
-		{
-			printf("--- STATUS: JOINED ALL THREADS!\n");	
 			return ;
-		}
 	}
 }
 
@@ -34,9 +30,9 @@ bool	check_philo_sim_exit(t_philosopher *philosopher)
 {
 	bool	sim_exit_value;
 	
-	pthread_mutex_lock(&philosopher->exit_sim_mutex);
+	pthread_mutex_lock(&philosopher->philo_mutex);
 	sim_exit_value = philosopher->exit_sim;
-	pthread_mutex_unlock(&philosopher->exit_sim_mutex);
+	pthread_mutex_unlock(&philosopher->philo_mutex);
 	return (sim_exit_value);
 }
 
@@ -47,10 +43,9 @@ void	exit_all_threads(t_simulation_state *simulation_context)
 	philosopher = simulation_context->philosphers;
 	while (true)
 	{
-		pthread_mutex_lock(&philosopher->exit_sim_mutex);
+		pthread_mutex_lock(&philosopher->philo_mutex);
 		philosopher->exit_sim = true;
-		// printf("Closing Philo[%d]...\n", philosopher->index);
-		pthread_mutex_unlock(&philosopher->exit_sim_mutex);
+		pthread_mutex_unlock(&philosopher->philo_mutex);
 		philosopher = philosopher->next;
 		if (philosopher == simulation_context->philosphers)
 			return ;

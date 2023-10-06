@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/04 17:09:12 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:30:08 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ static int	init_philo_mutexes(t_philosopher *philosopher, t_simulation_state *si
 {
 	if (pthread_mutex_init(&philosopher->philo_mutex, NULL) != SUCCESS)
 		return (ERROR);
-	pthread_mutex_init(&philosopher->exit_sim_mutex, NULL);
 	philosopher->shared_mutex = &simulation_context->shared_mutex;
 	// philosopher->left_fork = simulation_context->forks[philosopher->index - 1];
 	// if (philosopher->index + 1 <= philosopher->sim_data.philo_count)

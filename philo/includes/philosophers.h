@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/04 16:45:46 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:30:11 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_philosopher {
 	t_simulation_data		sim_data;
 	pthread_t				thread;
 	pthread_mutex_t			philo_mutex;
-	pthread_mutex_t			exit_sim_mutex;
 	pthread_mutex_t			*shared_mutex;
 	int						index;
 	bool					exit_sim;

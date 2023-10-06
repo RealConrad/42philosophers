@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/10/06 14:43:30 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/06 15:42:40 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME			:= philo
 # Compiler and flags
 #-fsanitize=thread
 CC				:= cc
-CFLAGS			:= -Wall -Werror -Wextra -pthread 
+CFLAGS			:= -Wall -Werror -Wextra -pthread
 INCLUDES		:= -I./includes
 
 # Directories
@@ -41,7 +41,6 @@ UTIL_FILES		:= input_utils.c utils.c
 PRINT_FILES		:= print.c
 FREE_FILES		:= free.c
 
-
 SRC 			+= $(addprefix $(SRC_DIR), $(SRC_FILES))
 SRC 			+= $(addprefix $(INIT_DIR), $(INIT_FILES))
 SRC 			+= $(addprefix $(TIME_DIR), $(TIME_FILES))
@@ -56,12 +55,6 @@ SRC				+= $(addprefix $(FREE_DIR), $(FREE_FILES))
 OBJS			:= $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC))
 
 all: $(NAME)
-
-nflag: CFLAGS =
-nflag: re
-
-debug: CFLAGS += -g
-debug: re
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
@@ -84,7 +77,10 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+norm:
+	norminette src/
+
+.PHONY: all clean fclean re norm
 
 # Colours to make it look nice :)
 DEFAULT			= "\033[39m"

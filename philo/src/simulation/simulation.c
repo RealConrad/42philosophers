@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 14:56:41 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:21:26 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ static void	handle_simulation(t_philosopher *philosopher)
 	while (true)
 	{
 		if (check_philo_sim_exit(philosopher))
-		{
-			printf("Philo[%d] EXITING!!!\n", philosopher->index);
 			return ;
-		}
 		philosopher_eat(philosopher);
 		philosopher_sleep(philosopher);
 		pthread_mutex_lock(philosopher->shared_mutex);

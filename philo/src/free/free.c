@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:49:56 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 14:15:54 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:30:03 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	free_memory(t_simulation_state *simulation_context, const char *error_msg, 
 		next_philosopher = philosopher->next;
 		pthread_mutex_destroy(philosopher->left_fork);
 		pthread_mutex_destroy(&philosopher->philo_mutex);
-		pthread_mutex_destroy(&philosopher->exit_sim_mutex);
 		free(philosopher->left_fork);
 		free(philosopher);
 		philosopher = next_philosopher;

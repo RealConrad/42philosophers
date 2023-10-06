@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:09:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/09/30 16:44:55 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:09:03 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	wait_for_duration(long wait_time)
 	long long	elapsed_time;
 
 	start_time = get_current_time();
-	while(true)
+	while (true)
 	{
 		elapsed_time = get_current_time() - start_time;
 		if (elapsed_time >= wait_time)
@@ -30,7 +30,7 @@ void	wait_for_duration(long wait_time)
 long long	get_time_difference(long long start_time_ms)
 {
 	long long	current_time_ms;
-	
+
 	current_time_ms = get_current_time();
 	return (current_time_ms - start_time_ms);
 }
@@ -57,4 +57,3 @@ long long	get_current_time(void)
 	result = (current_time.tv_sec * 1000) + ((current_time.tv_usec) / 1000);
 	return (result);
 }
-

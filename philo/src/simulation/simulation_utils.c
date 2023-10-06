@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:15:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 18:11:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 18:50:18 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	philosopher_eat(t_philosopher *philosopher)
 {
 	lock_forks(philosopher);
 	pthread_mutex_lock(philosopher->shared_mutex);
+	print_philosopher_state(philosopher, TAKEN_FORK);
+	print_philosopher_state(philosopher, TAKEN_FORK);
 	print_philosopher_state(philosopher, EATING);
 	pthread_mutex_unlock(philosopher->shared_mutex);
 	update_philo_eat_data(philosopher);

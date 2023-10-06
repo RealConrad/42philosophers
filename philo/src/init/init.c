@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:56:07 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 17:12:24 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context,
 	int				i;
 
 	i = 1;
-	pthread_mutex_init(&simulation_context->shared_mutex, NULL);
-	pthread_mutex_lock(&simulation_context->shared_mutex);
 	simulation_context->start_time_ms = 0;
 	while (i <= (int)atol(argv[0]))
 	{

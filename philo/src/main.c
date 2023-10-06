@@ -6,18 +6,25 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:59:06 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 17:11:46 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+// HANDLE 1 PHILO!!
 int	main(int argc, char **argv)
 {
-	t_simulation_state	simulation_context = {0};
+	t_simulation_state	simulation_context;
 
 	if (argc != 5 && argc != 6)
 		return (display_error(ERR_INVALID_ARG), ERROR);
+	simulation_context.start_time_ms = 0;
+	simulation_context.num_finished_eating = 0;
+	simulation_context.philosphers = NULL;
+	if (pthread_mutex_init(&simulation_context.shared_mutex, NULL) != SUCCESS)
+		return (display_error(ERR_MUTEX_INITIALIZATION), ERROR);
+	pthread_mutex_lock(&simulation_context.shared_mutex);
 	if (init_philos(&simulation_context, --argc, ++argv) != SUCCESS)
 		return (ERROR);
 	monitor_philosophers(&simulation_context);

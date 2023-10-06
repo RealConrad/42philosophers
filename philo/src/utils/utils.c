@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 14:42:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 14:49:05 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	join_threads(t_simulation_state *simulation_context)
 		pthread_join(temp->thread, NULL);
 		temp = temp->next;
 		if (temp == simulation_context->philosphers)
+		{
+			printf("--- STATUS: JOINED ALL THREADS!\n");	
 			return ;
+		}
 	}
 }
 

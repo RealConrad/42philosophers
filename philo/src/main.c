@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 14:40:42 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 14:48:29 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	main(int argc, char **argv)
 	monitor_philosophers(&simulation_context);
 	exit_all_threads(&simulation_context);
 	pthread_mutex_unlock(&simulation_context.shared_mutex);
+	
+	wait_for_duration(1000);
+	printf("--------------JOINING THREADS--------------\n");
+	
 	join_threads(&simulation_context);
 	free_memory(&simulation_context, "", false);
 	// system("leaks philo");

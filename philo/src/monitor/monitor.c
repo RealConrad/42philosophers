@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:36:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 18:12:06 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 14:57:36 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static int	check_eat_count(t_philosopher *philosopher, t_simulation_state *simul
 		philosopher->eaten_enough = true;
 		simulation_context->num_finished_eating++;
 		if (simulation_context->num_finished_eating == philosopher->sim_data.philo_count)
+		{
+			pthread_mutex_unlock(&philosopher->philo_mutex);
 			return (ERROR);
+		}
 	}
 	pthread_mutex_unlock(&philosopher->philo_mutex);
 	return (SUCCESS);
@@ -58,7 +61,10 @@ static int	should_philosopher_die(t_philosopher *philosopher)
 {
 	pthread_mutex_lock(&philosopher->philo_mutex);
 	if (get_time_difference(philosopher->time_since_last_meal) > philosopher->sim_data.time_to_die)
+	{
+		pthread_mutex_unlock(&philosopher->philo_mutex);
 		return (ERROR);
+	}
 	pthread_mutex_unlock(&philosopher->philo_mutex);
 	return (SUCCESS);	
 }

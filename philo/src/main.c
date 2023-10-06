@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 14:48:29 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 14:55:09 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	join_threads(&simulation_context);
 	free_memory(&simulation_context, "", false);
 	// system("leaks philo");
-	// printf("\n\n\033[32mFinished simulation!\n\033[0m");
+	printf("\n\n\033[32mFinished simulation!\n\033[0m");
 	return (SUCCESS);
 }
 

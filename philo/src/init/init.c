@@ -6,31 +6,34 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 15:30:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:21:19 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	init_philo_mutexes(t_philosopher *philosopher, t_simulation_state *simulation_context);
-static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philosopher *philosopher, char **argv);
-static int	init_philo_linked_list(t_simulation_state *simulation_context, char **argv);
+static int	init_philo_mutexes(t_philosopher *philosopher,
+				t_simulation_state *simulation_context);
+static int	assign_new_philosopher_data(t_simulation_state *simulation_context,
+				t_philosopher *philosopher, char **argv);
+static int	init_philo_linked_list(t_simulation_state *simulation_context,
+				char **argv);
+static int	create_threads(t_simulation_state *simulation_context);
 
 int	init_philos(t_simulation_state *simulation_context, int argc, char **argv)
 {
 	if (!check_input(argc, argv))
 		return (ERROR);
-	// if (init_forks(simulation_context, argv) != SUCCESS)
-	// 	return (ERROR);
 	if (init_philo_linked_list(simulation_context, argv) != SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
 }
 
-static int	init_philo_linked_list(t_simulation_state *simulation_context, char **argv)
+static int	init_philo_linked_list(t_simulation_state *simulation_context,
+				char **argv)
 {
-	t_philosopher 	*philosopher;
-	int 			i;
+	t_philosopher	*philosopher;
+	int				i;
 
 	i = 1;
 	pthread_mutex_init(&simulation_context->shared_mutex, NULL);
@@ -42,25 +45,19 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context, char *
 		if (!philosopher)
 			return (ERROR);
 		philosopher->index = i;
-		if (assign_new_philosopher_data(simulation_context, philosopher, argv) != SUCCESS)
+		if (assign_new_philosopher_data(simulation_context, philosopher, argv)
+			!= SUCCESS)
 			return (ERROR);
 		add_philosopher_to_linked_list(simulation_context, philosopher);
 		i++;
 	}
-	philosopher = simulation_context->philosphers;
-	while (true)
-	{
-		// printf("Philo [%d] LEFT_FORK: %p -- RIGHT_FORK: %p\n", philosopher->index, philosopher->left_fork, philosopher->right_fork);
-		if (pthread_create(&philosopher->thread, NULL, *begin_simulation, philosopher) != SUCCESS)
-			return (ERROR);
-		philosopher = philosopher->next;
-		if (philosopher == simulation_context->philosphers)
-			break ;
-	}
+	if (create_threads(simulation_context) != SUCCESS)
+		return (ERROR);
 	return (SUCCESS);
 }
 
-static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t_philosopher *philosopher, char **argv)
+static int	assign_new_philosopher_data(t_simulation_state *simulation_context,
+				t_philosopher *philosopher, char **argv)
 {
 	philosopher->sim_data.philo_count = atol(argv[0]);
 	philosopher->sim_data.time_to_die = atol(argv[1]);
@@ -77,15 +74,29 @@ static int	assign_new_philosopher_data(t_simulation_state *simulation_context, t
 	return (SUCCESS);
 }
 
-static int	init_philo_mutexes(t_philosopher *philosopher, t_simulation_state *simulation_context)
+static int	init_philo_mutexes(t_philosopher *philosopher,
+				t_simulation_state *simulation_context)
 {
 	if (pthread_mutex_init(&philosopher->philo_mutex, NULL) != SUCCESS)
 		return (ERROR);
 	philosopher->shared_mutex = &simulation_context->shared_mutex;
-	// philosopher->left_fork = simulation_context->forks[philosopher->index - 1];
-	// if (philosopher->index + 1 <= philosopher->sim_data.philo_count)
-	// 	philosopher->right_fork = simulation_context->forks[philosopher->index];
-	// else
-	// 	philosopher->right_fork = simulation_context->forks[0];
+	return (SUCCESS);
+}
+
+static int	create_threads(t_simulation_state *simulation_context)
+{
+	t_philosopher	*philosopher;
+
+	philosopher = simulation_context->philosphers;
+	while (true)
+	{
+		if (pthread_create(&philosopher->thread, NULL,
+				*begin_simulation, philosopher)
+			!= SUCCESS)
+			return (ERROR);
+		philosopher = philosopher->next;
+		if (philosopher == simulation_context->philosphers)
+			return (SUCCESS);
+	}
 	return (SUCCESS);
 }

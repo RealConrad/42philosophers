@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/03 18:32:41 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/04 09:22:47 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ void	exit_all_threads(t_simulation_state *simulation_context)
 		pthread_mutex_unlock(&philosopher->exit_sim_mutex);
 		philosopher = philosopher->next;
 		if (philosopher == simulation_context->philosphers)
-		{
-			// wait_for_duration(philosopher->sim_data.time_to_eat +philosopher->sim_data.time_to_sleep + 20);
 			return ;
-		}
 	}
 }

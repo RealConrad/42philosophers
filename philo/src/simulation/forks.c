@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:22:39 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/04 09:16:55 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/04 13:17:32 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,22 @@ void	lock_forks(t_philosopher *philosopher)
 {
 	if (philosopher->index % 2 == EVEN)
 	{
-		pthread_mutex_lock(&philosopher->left_fork.mutex);
-		pthread_mutex_lock(&philosopher->right_fork.mutex);
+		pthread_mutex_lock(philosopher->left_fork);
+		pthread_mutex_lock(philosopher->right_fork);
 	}
 	else
 	{
-		pthread_mutex_lock(&philosopher->right_fork.mutex);
-		pthread_mutex_lock(&philosopher->left_fork.mutex);
+		pthread_mutex_lock(philosopher->right_fork);
+		pthread_mutex_lock(philosopher->left_fork);
 	}
+	pthread_mutex_lock(philosopher->shared_mutex);
 	print_philosopher_state(philosopher, TAKEN_FORK);
 	print_philosopher_state(philosopher, TAKEN_FORK);
+	pthread_mutex_unlock(philosopher->shared_mutex);
 }
 
 void	unlock_forks(t_philosopher *philosopher)
 {
-	pthread_mutex_unlock(&philosopher->left_fork.mutex);
-	pthread_mutex_unlock(&philosopher->right_fork.mutex);
+	pthread_mutex_unlock(philosopher->left_fork);
+	pthread_mutex_unlock(philosopher->right_fork);
 }

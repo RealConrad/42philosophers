@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/10/03 17:26:43 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/04 15:58:10 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,12 @@ SRC				+= $(addprefix $(FREE_DIR), $(FREE_FILES))
 OBJS			:= $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC))
 
 all: $(NAME)
+
+nflag: CFLAGS =
+nflag: re
+
+debug: CFLAGS += -g
+debug: re
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)

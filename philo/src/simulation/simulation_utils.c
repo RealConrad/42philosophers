@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:15:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 18:50:18 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/07 14:25:39 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,11 @@ void	philosopher_think(t_philosopher *philosopher)
 	pthread_mutex_lock(philosopher->shared_mutex);
 	print_philosopher_state(philosopher, THINKING);
 	pthread_mutex_unlock(philosopher->shared_mutex);
+}
+
+void	philosopher_normal_routine(t_philosopher *philosopher)
+{
+	philosopher_eat(philosopher);
+	philosopher_sleep(philosopher);
+	philosopher_think(philosopher);
 }

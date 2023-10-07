@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:09:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:09:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/07 14:28:20 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ long long	get_time_difference(long long start_time_ms)
 }
 
 /**
- * @brief    Gets the current time in milliseconds since the Unix epoch (1970).
+ * @brief Gets the current time in milliseconds since the Unix epoch (1970).
  * 
  * This function uses the `gettimeofday` method to retrieve the current time
  * and then converts it to milliseconds

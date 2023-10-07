@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/07 14:26:04 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/07 15:19:45 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	handle_simulation(t_philosopher *philosopher)
 {
 	philosopher_think(philosopher);
 	if (philosopher->index == 3)
-		wait_for_duration(2);
+		wait_for_duration(1);
 	if (philosopher->index % 2 == ODD)
 	{
 		philosopher_eat(philosopher);

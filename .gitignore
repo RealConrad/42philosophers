@@ -1,5 +1,6 @@
 *.o
 philo/philo
+philo/philo_bonus
 .build
 test.c
 a.out

@@ -2,7 +2,8 @@
 	"files.associations": {
 		"philosophers.h": "c",
 		"chrono": "c",
-		"__node_handle": "c"
+		"__node_handle": "c",
+		"philosophers_bonus.h": "c"
 	},
 	"C_Cpp.intelliSenseEngineFallback": "enabled",
 	"C_Cpp.errorSquiggles": "enabled"

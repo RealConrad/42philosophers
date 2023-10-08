@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/07 15:19:45 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/08 14:15:20 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	handle_one_philosopher(t_philosopher *philosopher)
 	pthread_mutex_lock(philosopher->shared_mutex);
 	print_philosopher_state(philosopher, TAKEN_FORK);
 	pthread_mutex_unlock(philosopher->shared_mutex);
-	wait_for_duration(philosopher->sim_data.time_to_die);
+	wait_for_duration(philosopher->sim_data.time_to_die + 3);
 	pthread_mutex_unlock(philosopher->left_fork);
 }
 

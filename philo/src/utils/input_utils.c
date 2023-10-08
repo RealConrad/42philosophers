@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:53:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 17:01:30 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/08 14:33:31 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ bool	check_input(int argc, char **argv)
 
 	i = 0;
 	if (atol(argv[0]) == 0)
+		return (false);
+	if (argv[4] && atol(argv[4]) == 0)
 		return (false);
 	while (i < argc)
 	{

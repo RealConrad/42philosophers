@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/09 22:11:05 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 01:53:47 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int			init_philos(t_simulation_state *simulaiton_context);
 
 /* ---------------------------------- Free ---------------------------------- */
 void		kill_philoospher_processes(t_simulation_state *simulaiton_context);
+void		kill_and_free(t_simulation_state *simulaiton_context);
 
 /* ---------------------------------- Time ---------------------------------- */
 void		wait_for_duration(long wait_time);

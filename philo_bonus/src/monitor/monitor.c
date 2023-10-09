@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 14:08:15 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 00:43:34 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 01:52:15 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,21 @@ void	*monitor_philosopher(void *arg)
 		{
 			sem_wait(philosopher->sim_data->print);
 			print_philosopher_state(philosopher, DEATH);
+			sem_wait(philosopher->philo_sem);
 			philosopher->exit_sim = true;
+			sem_post(philosopher->philo_sem);
+			sem_post(philosopher->sim_data->death);
 			break ;
 		}
+		sem_wait(philosopher->philo_sem);
+		if (philosopher->sim_data->required_eat_times
+			&& philosopher->eat_count == philosopher->sim_data->required_eat_times)
+		{
+			sem_post(philosopher->philo_sem);
+			break ;
+		}
+		sem_post(philosopher->philo_sem);
 		usleep(100);
 	}
-	exit(0);
+	return (NULL);
 }
-
-// static int	check_eat_count(t_philosopher *philosopher,
-// 	t_simulation_state *simulation_context)
-// {
-// 	pthread_mutex_lock(&philosopher->philo_mutex);
-// 	if (philosopher->eat_count == philosopher->sim_data.required_eat_times
-// 		&& !philosopher->eaten_enough)
-// 	{
-// 		philosopher->eaten_enough = true;
-// 		simulation_context->num_finished_eating++;
-// 		if (simulation_context->num_finished_eating
-// 			== philosopher->sim_data->philo_count)
-// 		{
-// 			// pthread_mutex_unlock(&philosopher->philo_mutex);
-// 			return (ERROR);
-// 		}
-// 	}
-// 	// pthread_mutex_unlock(&philosopher->philo_mutex);
-// 	return (SUCCESS);
-// }

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:44:20 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 00:34:06 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 01:43:03 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	init_philos(t_simulation_state *simulaiton_context)
 		philosopher->index = i;
 		philosopher->sim_data = &simulaiton_context->sim_data;
 		philosopher->start_time_ms = &simulaiton_context->start_time_ms;
-		philosopher->exit_sim = false;
 		philosopher->time_since_last_meal = get_current_time();
+		philosopher->exit_sim = false;
 		philosopher->sem_name = strjoin("/philo_sem_", i);
 		philosopher->philo_sem = sem_open(philosopher->sem_name, O_CREAT, 0644, 1);
 		add_philosopher_to_linked_list(simulaiton_context, philosopher);

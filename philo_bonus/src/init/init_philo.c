@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:44:20 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 01:43:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 10:49:45 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	init_philos(t_simulation_state *simulaiton_context)
 		philosopher->exit_sim = false;
 		philosopher->sem_name = strjoin("/philo_sem_", i);
 		philosopher->philo_sem = sem_open(philosopher->sem_name, O_CREAT, 0644, 1);
+		// if (!philosopher->philo_sem)
+		// 	exit(0);
 		add_philosopher_to_linked_list(simulaiton_context, philosopher);
 		i++;
 	}

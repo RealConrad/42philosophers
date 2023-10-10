@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:14:04 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 06:59:54 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 10:59:24 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ static void	begin_simulation(t_philosopher *philosopher)
 {
 	pthread_t	t1;
 
-	philosopher->time_since_last_meal = get_current_time();
 	if (pthread_create(&t1, NULL, *monitor_philosopher, philosopher) != SUCCESS)
 		return ;
-	pthread_detach(t1);
+	// pthread_detach(t1);
 	if (philosopher->sim_data->philo_count == 1)
 		handle_one_philosopher(philosopher);
 	else

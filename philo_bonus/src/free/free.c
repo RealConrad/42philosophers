@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:30:50 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 04:57:20 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 05:44:29 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	kill_and_free(t_simulation_state *simulaiton_context)
 		sem_unlink(philosopher->sem_name);
 		free(philosopher->sem_name);
 		free(philosopher);
-
+		
 		philosopher = next_philosopher;
 		if (philosopher == simulaiton_context->philosphers)
 			return ;

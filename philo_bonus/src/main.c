@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 04:54:35 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 05:47:22 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	main(int argc, char **argv)
 
 	sem_unlink("/philo_sem_1");
 	sem_unlink("/philo_sem_2");
-	// simulation_context.philosphers = NULL;
-	// simulation_context.sim_data = 0;
-	// simulation_context.start_time_ms = 0;
+	simulation_context.should_exit = false;
 	if (argc != 5 && argc != 6)
 		return (display_error(ERR_INVALID_ARG), ERROR);
 		
@@ -38,6 +36,9 @@ int	main(int argc, char **argv)
 	if (simulation_context.sim_data.required_eat_times)
 		pthread_create(&t1, NULL, *monitor_eat_count, &simulation_context);
 	sem_wait(simulation_context.sim_data.exit_program);
+	sem_post(simulation_context.sim_data.is_done_eating);
+	simulation_context.should_exit = true;
+	usleep(1000);
 	if (simulation_context.sim_data.required_eat_times)
 		pthread_detach(t1);
 	kill_and_free(&simulation_context);
@@ -54,6 +55,8 @@ static void	*monitor_eat_count(void *arg)
 	while (eat_counter < simulation_context->sim_data.philo_count)
 	{
 		sem_wait(simulation_context->sim_data.is_done_eating);
+		if (simulation_context->should_exit)
+			return (NULL);
 		eat_counter++;
 	}
 	sem_wait(simulation_context->sim_data.print);

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 04:51:32 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 05:33:02 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_simulation_state {
 	t_philosopher		*philosphers;
 	t_simulation_data	sim_data;
 	long long			start_time_ms;
+	bool				should_exit;
 }	t_simulation_state;
 
 /* ------------------------------- Simulaiton ------------------------------- */

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:15:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 06:24:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 06:57:59 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	philosopher_think(t_philosopher *philosopher)
 	print_philosopher_state(philosopher, THINKING);
 	sem_post(philosopher->sim_data->print);
 }
+
 
 void	philosopher_normal_routine(t_philosopher *philosopher)
 {

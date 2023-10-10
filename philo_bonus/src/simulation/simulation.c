@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:14:04 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 06:23:52 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 06:59:54 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	create_philosopher_processes(t_simulation_state *simulation_context)
 	t_philosopher	*philosopher;
 
 	philosopher = simulation_context->philosphers;
-	sem_wait(simulation_context->sim_data.print);
 	simulation_context->start_time_ms = get_current_time();
 	while (true)
 	{
@@ -34,16 +33,13 @@ int	create_philosopher_processes(t_simulation_state *simulation_context)
 		if (philosopher == simulation_context->philosphers)
 			break ;
 	}
-	sem_post(simulation_context->sim_data.print);
+	// sem_post(simulation_context->sim_data.print);
 	return (SUCCESS);
 }
 
 static void	begin_simulation(t_philosopher *philosopher)
 {
 	pthread_t	t1;
-
-	sem_wait(philosopher->sim_data->print);
-	sem_post(philosopher->sim_data->print);
 
 	philosopher->time_since_last_meal = get_current_time();
 	if (pthread_create(&t1, NULL, *monitor_philosopher, philosopher) != SUCCESS)
@@ -59,7 +55,7 @@ static void	handle_simulation(t_philosopher *philosopher)
 {
 	philosopher_think(philosopher);
 	if (philosopher->index % 2 == ODD)
-		wait_for_duration(3);
+		wait_for_duration(1);
 	while (!philosopher->exit_sim)
 	{
 		philosopher_eat(philosopher);

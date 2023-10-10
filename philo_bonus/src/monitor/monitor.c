@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 14:08:15 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 06:40:42 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 07:43:37 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	*monitor_philosopher(void *arg)
 			sem_post(philosopher->philo_sem);
 			sem_wait(philosopher->sim_data->print);
 			print_philosopher_state(philosopher, DEATH);
-			philosopher->exit_sim = true;
 			sem_post(philosopher->sim_data->exit_program);
 			break ;
 		}

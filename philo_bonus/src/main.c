@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 03:52:52 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 03:54:34 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 		pthread_create(&t1, NULL, *monitor_eat_count, &simulation_context);
 	sem_wait(simulation_context.sim_data.exit_program);
 	if (simulation_context.sim_data.required_eat_times)
-		pthread_join(t1, NULL);
+		pthread_detach(t1);
 	kill_and_free(&simulation_context);
 	return (SUCCESS);
 }

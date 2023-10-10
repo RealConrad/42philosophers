@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/08 14:15:20 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 12:44:57 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	*begin_simulation(void *arg)
 	philosopher = (t_philosopher *)arg;
 	pthread_mutex_lock(philosopher->shared_mutex);
 	pthread_mutex_unlock(philosopher->shared_mutex);
+	pthread_mutex_lock(&philosopher->philo_mutex);
 	philosopher->time_since_last_meal = get_current_time();
+	pthread_mutex_unlock(&philosopher->philo_mutex);
 	if (philosopher->sim_data.philo_count == 1)
 		handle_one_philosopher(philosopher);
 	else if (philosopher->sim_data.philo_count == 3)

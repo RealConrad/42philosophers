@@ -6,13 +6,14 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:14:04 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 03:36:21 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 04:11:52 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
 static void	begin_simulation(t_philosopher *philosopher);
+static void	handle_one_philosopher(t_philosopher *philosopher);
 static void	handle_simulation(t_philosopher *philosopher);
 
 int	create_philosopher_processes(t_simulation_state *simulation_context)
@@ -48,8 +49,10 @@ static void	begin_simulation(t_philosopher *philosopher)
 	if (pthread_create(&t1, NULL, *monitor_philosopher, philosopher) != SUCCESS)
 		return ;
 	pthread_detach(t1);
-
-	handle_simulation(philosopher);
+	if (philosopher->sim_data->philo_count == 1)
+		handle_one_philosopher(philosopher);
+	else
+		handle_simulation(philosopher);
 }
 
 static void	handle_simulation(t_philosopher *philosopher)
@@ -65,15 +68,11 @@ static void	handle_simulation(t_philosopher *philosopher)
 	}
 }
 
-
-	// if (philosopher->index % 2 == ODD)
-	// {
-	// 	philosopher_eat(philosopher);
-	// 	philosopher_sleep(philosopher);
-	// 	philosopher_think(philosopher);
-	// }
-	// else
-	// {
-	// 	philosopher_sleep(philosopher);
-	// 	philosopher_think(philosopher);
-	// }
+static void	handle_one_philosopher(t_philosopher *philosopher)
+{
+	sem_wait(philosopher->sim_data->print);
+	print_philosopher_state(philosopher, THINKING);
+	print_philosopher_state(philosopher, TAKEN_FORK);
+	wait_for_duration(philosopher->sim_data->time_to_die + 1);
+	sem_post(philosopher->sim_data->print);
+}

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 03:54:34 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 04:54:35 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ static void	*monitor_eat_count(void *arg);
 
 int	main(int argc, char **argv)
 {
-	t_simulation_state	simulation_context;
+	t_simulation_state	simulation_context = {0};
 	pthread_t			t1;
 
 	sem_unlink("/philo_sem_1");
 	sem_unlink("/philo_sem_2");
+	// simulation_context.philosphers = NULL;
+	// simulation_context.sim_data = 0;
+	// simulation_context.start_time_ms = 0;
 	if (argc != 5 && argc != 6)
 		return (display_error(ERR_INVALID_ARG), ERROR);
 		

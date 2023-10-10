@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 03:40:48 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 04:51:32 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ void		update_philo_eat_data(t_philosopher *philosopher);
 void		philosopher_normal_routine(t_philosopher *philosopher);
 
 /* ---------------------------------- Print --------------------------------- */
-void	print_philosopher_state(t_philosopher *philosopher,
-			t_philosopher_state state);
+void		print_philosopher_state(t_philosopher *philosopher,
+				t_philosopher_state state);
 
 /* ---------------------------------- Init ---------------------------------- */
 int			init_sim_data(t_simulation_data *simulation_data, int argc,

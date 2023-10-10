@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:30:58 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 03:11:17 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 04:09:30 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void	print_philosopher_state(t_philosopher *philosopher,
 			get_time_difference(*(philosopher->start_time_ms)),
 			philosopher->index, DEATH_TEXT);
 	sem_post(philosopher->philo_sem);
+	// fflush(stdout);
 }

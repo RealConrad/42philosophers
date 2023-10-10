@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:14:04 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 01:51:05 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 03:10:11 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ static void	begin_simulation(t_philosopher *philosopher)
 	philosopher->time_since_last_meal = get_current_time();
 	if (pthread_create(&t1, NULL, *monitor_philosopher, philosopher) != SUCCESS)
 		return ;
-
+	pthread_detach(t1);
+	
 	handle_simulation(philosopher);
-	printf("Joining threads...\n");
-	pthread_join(t1, NULL);
 }
 
 static void	handle_simulation(t_philosopher *philosopher)
@@ -66,6 +65,7 @@ static void	handle_simulation(t_philosopher *philosopher)
 		philosopher_think(philosopher);
 	}
 }
+
 
 	// if (philosopher->index % 2 == ODD)
 	// {

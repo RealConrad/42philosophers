@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:56:36 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 01:42:57 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 02:50:38 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int	init_sim_data(t_simulation_data *simulation_data, int argc, char **argv)
 	sem_unlink("/forks");
 	sem_unlink("/print");
 	sem_unlink("/death");
+	sem_unlink("/is_done_eating");
 	simulation_data->forks = sem_open("/forks", O_CREAT, 0644, simulation_data->philo_count / 2);
 	simulation_data->print = sem_open("/print", O_CREAT, 0644, 1);
 	simulation_data->death = sem_open("/death", O_CREAT, 0644, 1);
+	simulation_data->is_done_eating = sem_open("/is_done_eating", O_CREAT, 0644, 1);
 	return (SUCCESS);
 }

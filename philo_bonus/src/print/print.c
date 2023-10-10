@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:30:58 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 01:44:56 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 03:11:17 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	print_philosopher_state(t_philosopher *philosopher,
 	t_philosopher_state state)
 {
+	sem_wait(philosopher->philo_sem);
 	if (state == TAKEN_FORK && !philosopher->exit_sim)
 		printf("%lld %d %s\n",
 			get_time_difference(*(philosopher->start_time_ms)),
@@ -35,4 +36,5 @@ void	print_philosopher_state(t_philosopher *philosopher,
 		printf("\033[31m%lld %d %s\n\033[0m",
 			get_time_difference(*(philosopher->start_time_ms)),
 			philosopher->index, DEATH_TEXT);
+	sem_post(philosopher->philo_sem);
 }

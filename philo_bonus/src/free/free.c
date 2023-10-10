@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:30:50 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 01:53:36 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 02:50:32 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	kill_and_free(t_simulation_state *simulaiton_context)
 	
 	sem_unlink("/forks");
 	sem_unlink("/print");
+	sem_unlink("/is_done_eating");
+	sem_unlink("/death");
 	printf("\033[31m\n\n------- KILLING PROCESSES! --------\n\033[0m \n");
 	while (true)
 	{

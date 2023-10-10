@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 01:53:47 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 02:49:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_simulation_data {
 	sem_t	*forks;
 	sem_t	*death;
 	sem_t	*print;
+	sem_t	*is_done_eating;
 	long	philo_count;
 	long	time_to_die;
 	long	time_to_eat;

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:30:50 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 05:44:29 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 06:31:39 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,7 @@ void	kill_and_free(t_simulation_state *simulaiton_context)
 	t_philosopher	*next_philosopher;
 
 	philosopher = simulaiton_context->philosphers;
-	sem_close(philosopher->sim_data->forks);
-	sem_close(philosopher->sim_data->print);
-	sem_close(philosopher->sim_data->is_done_eating);
-	sem_close(philosopher->sim_data->exit_program);
-	
-	sem_unlink("/forks");
-	sem_unlink("/print");
-	sem_unlink("/is_done_eating");
-	sem_unlink("/exit_program");
+
 	// printf("\033[31m\n\n------- KILLING PROCESSES! --------\n\033[0m \n");
 	while (true)
 	{
@@ -39,6 +31,15 @@ void	kill_and_free(t_simulation_state *simulaiton_context)
 		
 		philosopher = next_philosopher;
 		if (philosopher == simulaiton_context->philosphers)
-			return ;
+			break ;
 	}
+	sem_close(philosopher->sim_data->forks);
+	sem_close(philosopher->sim_data->print);
+	sem_close(philosopher->sim_data->is_done_eating);
+	sem_close(philosopher->sim_data->exit_program);
+	
+	sem_unlink("/forks");
+	sem_unlink("/print");
+	sem_unlink("/is_done_eating");
+	sem_unlink("/exit_program");
 }

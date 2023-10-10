@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:46:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 05:47:22 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 06:35:51 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@ int	main(int argc, char **argv)
 	t_simulation_state	simulation_context = {0};
 	pthread_t			t1;
 
-	sem_unlink("/philo_sem_1");
-	sem_unlink("/philo_sem_2");
 	simulation_context.should_exit = false;
+
 	if (argc != 5 && argc != 6)
 		return (display_error(ERR_INVALID_ARG), ERROR);
-		
+	
+	sem_unlink("/philo_sem_1");
+	sem_unlink("/philo_sem_2");
+	sem_unlink("/philo_sem_3");
+	sem_unlink("/philo_sem_4");
 	if (init_sim_data(&simulation_context.sim_data, --argc, ++argv) != SUCCESS)
 		return (ERROR);
 	if (init_philos(&simulation_context) != SUCCESS)
 		return (ERROR);
 	if (create_philosopher_processes(&simulation_context) != SUCCESS)
 		return (ERROR);
-
 	sem_wait(simulation_context.sim_data.exit_program);
 	if (simulation_context.sim_data.required_eat_times)
 		pthread_create(&t1, NULL, *monitor_eat_count, &simulation_context);

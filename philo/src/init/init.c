@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 17:12:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 12:30:08 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context,
 	simulation_context->start_time_ms = 0;
 	while (i <= (int)atol(argv[0]))
 	{
-		philosopher = malloc(sizeof(t_philosopher));
+		philosopher = ft_calloc(1, sizeof(t_philosopher));
 		if (!philosopher)
 			return (display_error(ERR_MEMORY_ALLOCATION), ERROR);
 		philosopher->index = i;

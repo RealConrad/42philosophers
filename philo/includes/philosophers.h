@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/07 14:25:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 12:29:52 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,5 @@ bool		check_input(int argc, char **argv);
 void		join_threads(t_simulation_state *simulation_context);
 bool		check_philo_sim_exit(t_philosopher *philosopher);
 void		exit_all_threads(t_simulation_state *simulation_context);
-
+void		*ft_calloc(size_t count, size_t size);
 #endif /* PHILOSOPHERS_H */

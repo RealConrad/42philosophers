@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:53:14 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 12:28:24 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,27 @@ void	display_error(t_error_type error_type)
 		printf("Error:\nMalloc call failed.\n");
 	else if (error_type == ERR_THREAD_CREATION)
 		printf("Error:\nFailed to create threads.\n");
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void			*p;
+	size_t			total;
+	size_t			i;
+	unsigned char	*ch;
+
+	total = count * size;
+	if (count && (total / count) != size)
+		return (NULL);
+	p = malloc(total);
+	if (!p)
+		return (NULL);
+	ch = (unsigned char *)p;
+	i = 0;
+	while (i < total)
+	{
+		ch[i] = 0;
+		i++;
+	}
+	return (p);
 }

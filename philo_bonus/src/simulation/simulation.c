@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:14:04 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 03:10:11 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 03:36:21 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	create_philosopher_processes(t_simulation_state *simulation_context)
 
 	philosopher = simulation_context->philosphers;
 	sem_wait(simulation_context->sim_data.print);
-	sem_wait(simulation_context->sim_data.death);
 	simulation_context->start_time_ms = get_current_time();
 	while (true)
 	{
@@ -49,7 +48,7 @@ static void	begin_simulation(t_philosopher *philosopher)
 	if (pthread_create(&t1, NULL, *monitor_philosopher, philosopher) != SUCCESS)
 		return ;
 	pthread_detach(t1);
-	
+
 	handle_simulation(philosopher);
 }
 

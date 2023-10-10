@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:15:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 01:42:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 03:38:46 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	philosopher_eat(t_philosopher *philosopher)
 	sem_wait(philosopher->philo_sem);
 	philosopher->eat_count++;
 	philosopher->time_since_last_meal = get_current_time();
-	
+	if (philosopher->sim_data->required_eat_times && philosopher->eat_count == philosopher->sim_data->required_eat_times)
+		sem_post(philosopher->sim_data->is_done_eating);
 	sem_post(philosopher->philo_sem);
 
 	wait_for_duration(philosopher->sim_data->time_to_eat);

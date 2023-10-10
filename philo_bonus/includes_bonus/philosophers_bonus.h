@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:14:28 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 02:49:55 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/10 03:40:48 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ typedef enum e_error_type {
 
 typedef struct s_simulation_data {
 	sem_t	*forks;
-	sem_t	*death;
 	sem_t	*print;
 	sem_t	*is_done_eating;
+	sem_t	*exit_program;
 	long	philo_count;
 	long	time_to_die;
 	long	time_to_eat;
@@ -108,7 +108,6 @@ int			init_sim_data(t_simulation_data *simulation_data, int argc,
 int			init_philos(t_simulation_state *simulaiton_context);
 
 /* ---------------------------------- Free ---------------------------------- */
-void		kill_philoospher_processes(t_simulation_state *simulaiton_context);
 void		kill_and_free(t_simulation_state *simulaiton_context);
 
 /* ---------------------------------- Time ---------------------------------- */

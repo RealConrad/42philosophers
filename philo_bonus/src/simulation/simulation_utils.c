@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:15:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 10:40:39 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/11 14:31:29 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	philosopher_eat(t_philosopher *philosopher)
 {
 	sem_wait(philosopher->sim_data->forks);
-
+	
 	sem_wait(philosopher->sim_data->print);
 	print_philosopher_state(philosopher, TAKEN_FORK);
 	print_philosopher_state(philosopher, TAKEN_FORK);
@@ -30,6 +30,7 @@ void	philosopher_eat(t_philosopher *philosopher)
 	sem_post(philosopher->philo_sem);
 
 	wait_for_duration(philosopher->sim_data->time_to_eat);
+	
 	sem_post(philosopher->sim_data->forks);
 }
 
@@ -47,12 +48,4 @@ void	philosopher_think(t_philosopher *philosopher)
 	sem_wait(philosopher->sim_data->print);
 	print_philosopher_state(philosopher, THINKING);
 	sem_post(philosopher->sim_data->print);
-}
-
-
-void	philosopher_normal_routine(t_philosopher *philosopher)
-{
-	philosopher_eat(philosopher);
-	philosopher_sleep(philosopher);
-	philosopher_think(philosopher);
 }

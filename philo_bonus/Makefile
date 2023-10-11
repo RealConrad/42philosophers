@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/22 15:16:09 by cwenz             #+#    #+#              #
-#    Updated: 2023/10/10 11:01:37 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/11 14:23:21 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME			:= philo_bonus
 # Compiler and flags
 #-fsanitize=thread
 CC				:= cc
-CFLAGS			:= -Wall -Werror -Wextra -pthread -fsanitize=thread
+CFLAGS			:= -Wall -Werror -Wextra -pthread
 INCLUDES		:= -I./includes_bonus
 # Directories
 BUILD_DIR		:= .build
@@ -56,23 +56,23 @@ OBJS			:= $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
-	@echo $(GREEN)"PHILOSOPHERS: Compiled successfully 〈◕﹏◕〉 ¯\_(ツ)_/¯"$(DEFAULT)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
+#	@echo $(GREEN)"PHILOSOPHERS: Compiled successfully 〈◕﹏◕〉 ¯\_(ツ)_/¯"$(DEFAULT)
 
 $(BUILD_DIR)/%.o: %.c
-	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@rm -f $(OBJS)
+	rm -f $(OBJS)
 	@if [ -d $(BUILD_DIR) ]; then \
 		rm -r $(BUILD_DIR); \
 	fi
 	@echo $(RED)"Removing object files"$(DEFAULT)
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo $(RED)"Removing $(NAME)"$(DEFAULT)
+	rm -f $(NAME)
+#	@echo $(RED)"Removing $(NAME)"$(DEFAULT)
 
 re: fclean all
 

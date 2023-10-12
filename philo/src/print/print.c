@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:30:58 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:12:34 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/12 12:35:10 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_philosopher_state(t_philosopher *philosopher,
 			get_time_difference(*(philosopher->start_time_ms)),
 			philosopher->index, SLEEP_TEXT);
 	else if (state == DEATH && !philosopher->exit_sim)
-		printf("\033[31m%lld %d %s\n\033[0m",
+		printf("%lld %d %s\n",
 			get_time_difference(*(philosopher->start_time_ms)),
 			philosopher->index, DEATH_TEXT);
 	pthread_mutex_unlock(&philosopher->philo_mutex);

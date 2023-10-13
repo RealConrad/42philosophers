@@ -6,12 +6,16 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:05:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 12:28:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/13 10:47:49 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/**
+ * @brief Joins all threads in a safe manner.
+ * @param simulation_context Holds all the philosopher threads.
+ */
 void	join_threads(t_simulation_state *simulation_context)
 {
 	t_philosopher	*temp;
@@ -26,6 +30,11 @@ void	join_threads(t_simulation_state *simulation_context)
 	}
 }
 
+/**
+ * @brief Checks if the philosopher should exit out the simulation.
+ * @param philosopher The philosopher to check.
+ * @return True if the philosopher should exit, otherwise false.
+ */
 bool	check_philo_sim_exit(t_philosopher *philosopher)
 {
 	bool	sim_exit_value;
@@ -36,6 +45,10 @@ bool	check_philo_sim_exit(t_philosopher *philosopher)
 	return (sim_exit_value);
 }
 
+/**
+ * @brief Changes every `philosopher->exit_sim` to true.
+ * @param simulation_context The context that holds all philosophers.
+ */
 void	exit_all_threads(t_simulation_state *simulation_context)
 {
 	t_philosopher	*philosopher;
@@ -52,6 +65,10 @@ void	exit_all_threads(t_simulation_state *simulation_context)
 	}
 }
 
+/**
+ * @brief Prints out an error statement to the console based on error_type.
+ * @param error_type The type of error to output to the console.
+ */
 void	display_error(t_error_type error_type)
 {
 	if (error_type == ERR_MUTEX_INITIALIZATION)
@@ -64,6 +81,14 @@ void	display_error(t_error_type error_type)
 		printf("Error:\nFailed to create threads.\n");
 }
 
+/**
+** @brief Allocates a block of memory for an array of elements, initializes 
+** the memory to zero, and returns a pointer to the first element 
+** of the allocated space
+** @param count Number of elements to allocate memory
+** @param size Size for each element
+** @return A pointer to the allocated memory or NULL if not found
+*/
 void	*ft_calloc(size_t count, size_t size)
 {
 	void			*p;

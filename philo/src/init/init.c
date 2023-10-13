@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/13 13:51:45 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/13 13:54:09 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context,
 static int	create_threads(t_simulation_state *simulation_context);
 
 /**
- * @brief Checks the command line input to see if its valid and inititalizes the philosopher
- * 	linked list.
+ * @brief Checks the command line input to see if its valid and inititalizes
+ * 	the philosopher linked list.
  * @param simulation_context Which holds all sim data as well as philosophers 
  * @param argc The number of command line arguments
  * @param argv The command line arguments

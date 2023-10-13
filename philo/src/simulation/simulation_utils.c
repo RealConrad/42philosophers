@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:15:46 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/13 13:27:56 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/13 13:54:38 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	philosopher_eat(t_philosopher *philosopher)
 }
 
 /**
- * @brief Handles a philosopher sleeping. Prints out the sleeping state
- * 	and waits `time_to_sleep`
+ * @brief Handles a philosopher sleeping. Prints out the sleeping
+ * 	state and waits `time_to_sleep`
  * @param philosopher The philosopher to be sleeping
  */
 void	philosopher_sleep(t_philosopher *philosopher)

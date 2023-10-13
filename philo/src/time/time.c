@@ -6,12 +6,16 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:09:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/07 14:28:20 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/13 13:12:35 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/**
+ * @brief Waits for wait_time in ms
+ * @param wait_time The time in ms to wait
+ */
 void	wait_for_duration(long wait_time)
 {
 	long long	start_time;
@@ -27,6 +31,13 @@ void	wait_for_duration(long wait_time)
 	}
 }
 
+/**
+ * @brief Calculates the time difference in milliseconds from the specified
+ * 	start time to the current time.
+ * @param start_time_ms The time in milliseconds from which the time
+ * 	is calculated.
+ * @return The time difference in milliseconds from the current time - start_time_ms.
+ */
 long long	get_time_difference(long long start_time_ms)
 {
 	long long	current_time_ms;

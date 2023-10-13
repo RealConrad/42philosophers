@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:36:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:14:10 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/13 13:45:02 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ static int	check_eat_count(t_philosopher *philosopher,
 				t_simulation_state *simulation_context);
 static int	should_philosopher_die(t_philosopher *philosopher);
 
+/**
+ * @brief Monitors the philosophers to check if the simulation should end.
+ * 
+ * 	It unlocks a shared mutex which then allows each thread to start the
+ * 	simulation.
+ * @param simulation_context The simulation context which holds all simulaiton
+ * 	related data as well as the philosophers.
+ */
 void	monitor_philosophers(t_simulation_state *simulation_context)
 {
 	t_philosopher	*philosopher;
@@ -42,6 +50,15 @@ void	monitor_philosophers(t_simulation_state *simulation_context)
 	}
 }
 
+/**
+ * @brief Checks if all philosophers have eaten atleast the required amount
+ * 	of times. 
+ * @param philosopher The philosopher to check if eaten enough.
+ * @param simulation_context The context which holds the counter of the
+ * 	total number of philosophers that have eaten enough.
+ * @return True if the philosophers haven't eaten enough, false if all
+ * 	philosophers
+ */
 static int	check_eat_count(t_philosopher *philosopher,
 	t_simulation_state *simulation_context)
 {
@@ -62,6 +79,11 @@ static int	check_eat_count(t_philosopher *philosopher,
 	return (SUCCESS);
 }
 
+/**
+ * @brief Checks if the philosopher has starved.
+ * @param philosopher The philosopher to check.
+ * @return True if the philosopher has NOT starved, otherwise false.
+ */
 static int	should_philosopher_die(t_philosopher *philosopher)
 {
 	pthread_mutex_lock(&philosopher->philo_mutex);

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:49:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/10 12:30:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/13 13:51:45 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context,
 				char **argv);
 static int	create_threads(t_simulation_state *simulation_context);
 
+/**
+ * @brief Checks the command line input to see if its valid and inititalizes the philosopher
+ * 	linked list.
+ * @param simulation_context Which holds all sim data as well as philosophers 
+ * @param argc The number of command line arguments
+ * @param argv The command line arguments
+ * @return True if nothing failed, otherwise false
+ */
 int	init_philos(t_simulation_state *simulation_context, int argc, char **argv)
 {
 	if (!check_input(argc, argv))
@@ -29,6 +37,14 @@ int	init_philos(t_simulation_state *simulation_context, int argc, char **argv)
 	return (SUCCESS);
 }
 
+/**
+ * @brief Allocates memory for the philosopher node and assigns data and 
+ * 	links it to the linked list.
+ * @param simulation_context The context which holds all simulation related
+ * 	data
+ * @param argv The command line arguments 
+ * @return True if everything succeeds, else false.
+ */
 static int	init_philo_linked_list(t_simulation_state *simulation_context,
 				char **argv)
 {
@@ -54,6 +70,14 @@ static int	init_philo_linked_list(t_simulation_state *simulation_context,
 	return (SUCCESS);
 }
 
+/**
+ * @brief Assigns data to the philosopher node.
+ * @param simulation_context The simulation context which holds all simulation
+ * 	related data.
+ * @param philosopher The philosopher to assign data to 
+ * @param argv The command line arguments
+ * @return True if everything was successful, else false.
+ */
 static int	assign_new_philosopher_data(t_simulation_state *simulation_context,
 				t_philosopher *philosopher, char **argv)
 {
@@ -73,6 +97,14 @@ static int	assign_new_philosopher_data(t_simulation_state *simulation_context,
 	return (SUCCESS);
 }
 
+/**
+ * @brief Initializes and allocates the philosopher mutexes (forks)
+ * 	and a philosopher variable mutex. It also assigns a shared mutex that
+ * 	is stored in simulaiton_context.
+ * @param philosopher The philosopher to initialize the mutexes for 
+ * @param simulation_context Holds the shared mutex
+ * @return True if everything was successful, else false.
+ */
 static int	init_philo_mutexes(t_philosopher *philosopher,
 				t_simulation_state *simulation_context)
 {
@@ -87,6 +119,12 @@ static int	init_philo_mutexes(t_philosopher *philosopher,
 	return (SUCCESS);
 }
 
+/**
+ * @brief Loops through the philosopher linked list and initializes
+ * 	each philosopher as a thread.
+ * @param simulation_context The context which holds the philosopher linked list
+ * @return True if everything was successful, else false.
+ */
 static int	create_threads(t_simulation_state *simulation_context)
 {
 	t_philosopher	*philosopher;

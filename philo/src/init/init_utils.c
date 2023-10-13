@@ -6,12 +6,17 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:08:32 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/06 16:35:49 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/13 13:52:17 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/**
+ * @brief Adds the given node to the end of the linked list
+ * @param simulation_context The context which holds the linked list
+ * @param node The node to be added to the end of the linked list
+ */
 void	add_philosopher_to_linked_list(t_simulation_state *simulation_context,
 		t_philosopher *node)
 {

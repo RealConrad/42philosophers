@@ -55,5 +55,6 @@ Example:
 ./philo 4 600 200 200 5
 ```
 
-
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 

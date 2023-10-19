@@ -27,6 +27,7 @@
 - Real-time status updates of each philosopher.
 - Adjustable parameters for the simulation.
 - Clean and well-commented code for better understanding.
+- Once the simulation should be stopped (a philosopher died or all philosophers have eaten the given amount) , it joins all threads and frees memory.
 
 ## How It Works
 The Dining Philosophers problem is a classic synchronization and multi-threaded problem which demonstrates the challenges of ensuring that multiple threads share resources without conflicts. In this project, [number of philosophers] philosophers sit at a round table, each with a bowl of spaghetti and a fork between each adjacent pair. The philosophers have 3 states, thinking, eating and sleeping. If they are thinking they cannot be eating, if they are eating they cannot be sleeping etc.. However, a philosopher needs both forks to eat, and must pick them up one at a time. This scenario leads to a number of synchronization issues which are addressed and solved in this implementation.
